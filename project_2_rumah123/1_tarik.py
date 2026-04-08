@@ -21,41 +21,31 @@ def parse_price_smart(price_str):
         return int(val)
     except: return 0
 
-def extract_specs_from_card(card_soup):
-    """Ekstraksi data fisik langsung dari elemen kartu (Fallback Mode)."""
-    lt = lb = kt = km = carport = 0
+def extract_specs_stable(card_soup):
+    """Ekstraksi data inti (LT, LB, KT, KM) secara presisi."""
+    lt = lb = kt = km = 0
     text_full = card_soup.get_text(" ").lower()
     
-    # LT & LB
     m_lt = re.search(r"lt\s*:?\s*(\d+)", text_full)
     m_lb = re.search(r"lb\s*:?\s*(\d+)", text_full)
     if m_lt: lt = int(m_lt.group(1))
     if m_lb: lb = int(m_lb.group(1))
     
-    # KT (Bedroom Icon)
     kt_el = card_soup.find("use", attrs={"xlink:href": re.compile(r"bedroom-icon")})
     if kt_el:
         kt_t = kt_el.find_parent("span").get_text(strip=True)
         m = re.search(r"(\d+)", kt_t)
         if m: kt = int(m.group(1))
     
-    # KM (Bathroom Icon)
     km_el = card_soup.find("use", attrs={"xlink:href": re.compile(r"bathroom-icon")})
     if km_el:
         km_t = km_el.find_parent("span").get_text(strip=True)
         m = re.search(r"(\d+)", km_t)
         if m: km = int(m.group(1))
-
-    # Carport (Car Icon) - Faktual dari listing
-    cp_el = card_soup.find("use", attrs={"xlink:href": re.compile(r"car-icon|garage-icon")})
-    if cp_el:
-        cp_t = cp_el.find_parent("span").get_text(strip=True)
-        m = re.search(r"(\d+)", cp_t)
-        if m: carport = int(m.group(1))
         
-    return lt, lb, kt, km, carport
+    return lt, lb, kt, km
 
-def scrape_rumah123_v58():
+def scrape_rumah123_v59():
     script_dir = Path(__file__).resolve().parent
     output_path = script_dir / 'brankas_data' / 'mentah' / 'properti_mentah.json'
     config_path = script_dir / 'config.json'
@@ -65,7 +55,7 @@ def scrape_rumah123_v58():
         cities = config.get("cities", [])
         max_pages = config.get("max_pages_per_city", 1)
 
-    print(f"[*] PRECISION-ENGINE V58: Full Data Integrity Mode Aktif...")
+    print(f"[*] STABLE-ENGINE V59: Core Data Extraction Aktif...")
     total_results = []
     seen_ids = set()
     driver = Driver(uc=True, headless=True)
@@ -80,15 +70,11 @@ def scrape_rumah123_v58():
                 print(f"\n>>> {city_name} | HAL {page_num}")
                 
                 driver.uc_open_with_reconnect(page_url, 6)
-                time.sleep(8)
+                time.sleep(6)
                 
                 soup = BeautifulSoup(driver.page_source, 'html.parser')
                 cards = soup.find_all("div", attrs={"data-name": "ldp-listing-card"})
                 
-                if not cards:
-                    print("    [!] Tidak ada kartu ditemukan.")
-                    break
-                    
                 added = 0
                 for card in cards:
                     try:
@@ -100,24 +86,20 @@ def scrape_rumah123_v58():
                         prop_id = id_match.group(1) if id_match else url_prop
                         if prop_id in seen_ids: continue
 
-                        # 1. Harga
                         price_el = card.find("span", attrs={"data-testid": "ldp-text-price"})
                         price_val = parse_price_smart(price_el.get_text(strip=True)) if price_el else 0
                         if price_val == 0: continue
 
-                        # 2. Lokasi Mikro
+                        lt, lb, kt, km = extract_specs_stable(card)
                         loc_el = card.find("p", class_=re.compile(r"text-greyText"))
                         lokasi = loc_el.get_text(strip=True) if loc_el else city_name
-
-                        # 3. Spesifikasi Fisik (LT, LB, KT, KM, Carport)
-                        lt, lb, kt, km, carport = extract_specs_from_card(card)
 
                         entry = {
                             "id": prop_id,
                             "judul": card.find("h2").get_text(strip=True) if card.find("h2") else "N/A",
                             "harga": str(price_val),
                             "lokasi": lokasi,
-                            "lt": lt, "lb": lb, "kt": kt, "km": km, "carport": carport,
+                            "lt": lt, "lb": lb, "kt": kt, "km": km,
                             "url_properti": url_prop,
                             "waktu_tarik": datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                         }
@@ -125,16 +107,15 @@ def scrape_rumah123_v58():
                         total_results.append(entry)
                         seen_ids.add(prop_id)
                         added += 1
-                        print(f"    [OK] {price_val/1e9:.1f}M | LT:{lt:3} CP:{carport} | {lokasi[:15]} | {entry['judul'][:25]}...")
+                        print(f"    [OK] {price_val/1e9:.1f}M | LT:{lt:3} LB:{lb:3} | {lokasi[:15]} | {entry['judul'][:25]}...")
 
                     except: continue
                 
-                print(f"--- Selesai Hal {page_num} | Berhasil: {added} ---")
                 with open(output_path, 'w') as f: json.dump(total_results, f, indent=4)
 
     finally:
         driver.quit()
-        print(f"\n[*] SELESAI. Total data unik terkumpul: {len(total_results)}")
+        print(f"\n[*] TOTAL DATA BERHASIL DITARIK: {len(total_results)}")
 
 if __name__ == "__main__":
-    scrape_rumah123_v58()
+    scrape_rumah123_v59()

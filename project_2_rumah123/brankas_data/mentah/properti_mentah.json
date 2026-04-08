@@ -1,5 +1,65 @@
 [
     {
+        "id": "hos41259583",
+        "judul": "Rumah Siap Huni di Tebet Barat Akses Jalan 3 Mobil",
+        "harga": "8000000000",
+        "lokasi": "Tebet, Jakarta Selatan",
+        "lt": 240,
+        "lb": 300,
+        "kt": 4,
+        "km": 4,
+        "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-tebet/rumah-siap-huni-di-tebet-barat-akses-jalan-3-mobil-hos41259583/",
+        "waktu_tarik": "2026-04-08 15:24:40"
+    },
+    {
+        "id": "hos17755033",
+        "judul": "Rumah 4 lantai di Pondok Indah, 25 KT, cocok kost exclusive, lokasi strategis",
+        "harga": "45000000000",
+        "lokasi": "Pondok Indah, Jakarta Selatan",
+        "lt": 864,
+        "lb": 520,
+        "kt": 25,
+        "km": 25,
+        "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-pondok-indah/rumah-4-lantai-di-pondok-indah-25-kt-cocok-kost-exclusive-lokasi-strategis-hos17755033/",
+        "waktu_tarik": "2026-04-08 15:24:40"
+    },
+    {
+        "id": "hos40412667",
+        "judul": "Rumah Pinggir Jalan Raya Manggarai Cocok Untuk Bank Resto Kantor",
+        "harga": "25000000000",
+        "lokasi": "Manggarai, Jakarta Selatan",
+        "lt": 658,
+        "lb": 450,
+        "kt": 4,
+        "km": 3,
+        "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-manggarai/rumah-pinggir-jalan-raya-manggarai-cocok-untuk-bank-resto-kantor-hos40412667/",
+        "waktu_tarik": "2026-04-08 15:24:40"
+    },
+    {
+        "id": "hos41370689",
+        "judul": "Dijual Rumah Mewah Ready Stok 3 Unit di Lebak Bulus",
+        "harga": "7510000000",
+        "lokasi": "Lebak Bulus, Jakarta Selatan",
+        "lt": 154,
+        "lb": 308,
+        "kt": 3,
+        "km": 4,
+        "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-lebak-bulus/dijual-rumah-mewah-ready-stok-3-unit-di-lebak-bulus-hos41370689/",
+        "waktu_tarik": "2026-04-08 15:24:40"
+    },
+    {
+        "id": "hos41370686",
+        "judul": "Dijual Rumah Dalam Cluster Siap Huni bisa KPR di Kemang Jakarta Selatan",
+        "harga": "9500000000",
+        "lokasi": "Kemang, Jakarta Selatan",
+        "lt": 234,
+        "lb": 279,
+        "kt": 3,
+        "km": 4,
+        "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-kemang/dijual-rumah-dalam-cluster-siap-huni-bisa-kpr-di-kemang-jakarta-selatan-hos41370686/",
+        "waktu_tarik": "2026-04-08 15:24:40"
+    },
+    {
         "id": "hos41370639",
         "judul": "Dijual Rumah Hitung Tanah di Kebayoran Lama Jakarta Selatan",
         "harga": "22500000000",
@@ -8,9 +68,8 @@
         "lb": 260,
         "kt": 4,
         "km": 3,
-        "carport": 0,
         "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-kebayoran-lama/dijual-rumah-hitung-tanah-di-kebayoran-lama-jakarta-selatan-hos41370639/",
-        "waktu_tarik": "2026-04-08 15:20:32"
+        "waktu_tarik": "2026-04-08 15:24:40"
     },
     {
         "id": "hos38854901",
@@ -21,9 +80,8 @@
         "lb": 215,
         "kt": 5,
         "km": 3,
-        "carport": 0,
         "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-kebayoran-baru/rumah-lama-lokasi-strategis-dekat-jalan-senopati-scbd-hos38854901/",
-        "waktu_tarik": "2026-04-08 15:20:32"
+        "waktu_tarik": "2026-04-08 15:24:40"
     },
     {
         "id": "hos41370671",
@@ -34,9 +92,8 @@
         "lb": 500,
         "kt": 6,
         "km": 7,
-        "carport": 0,
         "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-pondok-indah/dijual-rumah-mewah-pondok-indah-hos41370671/",
-        "waktu_tarik": "2026-04-08 15:20:32"
+        "waktu_tarik": "2026-04-08 15:24:40"
     },
     {
         "id": "hos41370585",
@@ -47,9 +104,8 @@
         "lb": 108,
         "kt": 3,
         "km": 2,
-        "carport": 0,
         "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-cirendeu/rumah-kawasan-asri-nempel-lebakbulus-wajib-survei-hos41370585/",
-        "waktu_tarik": "2026-04-08 15:20:32"
+        "waktu_tarik": "2026-04-08 15:24:40"
     },
     {
         "id": "hos13818934",
@@ -60,9 +116,8 @@
         "lb": 600,
         "kt": 4,
         "km": 4,
-        "carport": 0,
         "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-permata-hijau/rumah-permata-hijau-raya-zonasi-k3-lokasi-strategis-nego-pemilik-hos13818934/",
-        "waktu_tarik": "2026-04-08 15:20:32"
+        "waktu_tarik": "2026-04-08 15:24:40"
     },
     {
         "id": "hos40212348",
@@ -73,9 +128,8 @@
         "lb": 450,
         "kt": 4,
         "km": 5,
-        "carport": 0,
         "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-cilandak/dijual-rumah-ekslusif-di-cilandak-barat-jakarta-selatan-hos40212348/",
-        "waktu_tarik": "2026-04-08 15:20:32"
+        "waktu_tarik": "2026-04-08 15:24:40"
     },
     {
         "id": "hos41370589",
@@ -86,9 +140,8 @@
         "lb": 354,
         "kt": 4,
         "km": 4,
-        "carport": 0,
         "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-cipete/dijual-cepat-rumah-luas-di-cipete-selatan-ada-pool-musholah-hos41370589/",
-        "waktu_tarik": "2026-04-08 15:20:32"
+        "waktu_tarik": "2026-04-08 15:24:40"
     },
     {
         "id": "hos41370579",
@@ -99,9 +152,8 @@
         "lb": 800,
         "kt": 5,
         "km": 5,
-        "carport": 0,
         "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-tebet/rumah-jaya-mandala-raya-tebet-jakarta-selatan-hos41370579/",
-        "waktu_tarik": "2026-04-08 15:20:32"
+        "waktu_tarik": "2026-04-08 15:24:40"
     },
     {
         "id": "hos40323696",
@@ -112,9 +164,8 @@
         "lb": 140,
         "kt": 3,
         "km": 3,
-        "carport": 0,
         "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-tb-simatupang/rumah-3-lantai-rooftop-selangkah-perkantoran-simatupang-shm-hos40323696/",
-        "waktu_tarik": "2026-04-08 15:20:32"
+        "waktu_tarik": "2026-04-08 15:24:40"
     },
     {
         "id": "hos41370525",
@@ -125,9 +176,8 @@
         "lb": 240,
         "kt": 3,
         "km": 1,
-        "carport": 0,
         "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-tebet/rumah-tebet-dalam-tebet-jakarta-selatan-hos41370525/",
-        "waktu_tarik": "2026-04-08 15:20:32"
+        "waktu_tarik": "2026-04-08 15:24:40"
     },
     {
         "id": "hos41282166",
@@ -138,9 +188,8 @@
         "lb": 78,
         "kt": 3,
         "km": 2,
-        "carport": 0,
         "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-cilandak/rumah-dengantanah-217-m2-18-km-ke-rs-fatmawati-di-cilandak-hos41282166/",
-        "waktu_tarik": "2026-04-08 15:20:32"
+        "waktu_tarik": "2026-04-08 15:24:40"
     },
     {
         "id": "hos41370513",
@@ -151,9 +200,8 @@
         "lb": 1250,
         "kt": 8,
         "km": 7,
-        "carport": 0,
         "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-kebayoran-baru/rumah-ophir-kebayoran-baru-jakarta-selatan-hos41370513/",
-        "waktu_tarik": "2026-04-08 15:20:32"
+        "waktu_tarik": "2026-04-08 15:24:40"
     },
     {
         "id": "hos40969211",
@@ -164,9 +212,8 @@
         "lb": 210,
         "kt": 4,
         "km": 4,
-        "carport": 0,
         "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-cilandak/dijual-rumah-modern-dalam-townhouse-di-margasatwa-cilandak-hos40969211/",
-        "waktu_tarik": "2026-04-08 15:20:32"
+        "waktu_tarik": "2026-04-08 15:24:40"
     },
     {
         "id": "hos39133102",
@@ -177,9 +224,8 @@
         "lb": 600,
         "kt": 6,
         "km": 4,
-        "carport": 0,
         "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-pondok-indah/rumah-pondok-indah-posisi-kluster-sangat-tenang-dan-nyaman-hos39133102/",
-        "waktu_tarik": "2026-04-08 15:20:32"
+        "waktu_tarik": "2026-04-08 15:24:40"
     },
     {
         "id": "hos41370299",
@@ -190,9 +236,8 @@
         "lb": 350,
         "kt": 4,
         "km": 3,
-        "carport": 0,
         "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-mampang-prapatan/rumah-besar-2-lantai-mampang-prapatan-jakarta-selatan-hos41370299/",
-        "waktu_tarik": "2026-04-08 15:20:32"
+        "waktu_tarik": "2026-04-08 15:24:40"
     },
     {
         "id": "hos10924435",
@@ -203,9 +248,8 @@
         "lb": 500,
         "kt": 3,
         "km": 3,
-        "carport": 0,
         "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-pondok-indah/lingkungan-asri-di-pondok-indah-hos10924435/",
-        "waktu_tarik": "2026-04-08 15:20:32"
+        "waktu_tarik": "2026-04-08 15:24:55"
     },
     {
         "id": "hos10762824",
@@ -216,9 +260,8 @@
         "lb": 478,
         "kt": 6,
         "km": 6,
-        "carport": 0,
         "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-pondok-indah/rumah-di-pondok-indah-jakarta-selatan-halaman-luas-hos10762824/",
-        "waktu_tarik": "2026-04-08 15:20:32"
+        "waktu_tarik": "2026-04-08 15:24:55"
     },
     {
         "id": "hos41370347",
@@ -229,9 +272,8 @@
         "lb": 500,
         "kt": 6,
         "km": 7,
-        "carport": 0,
         "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-pondok-indah/dijual-rumah-mewah-pondok-indah-hos41370347/",
-        "waktu_tarik": "2026-04-08 15:20:32"
+        "waktu_tarik": "2026-04-08 15:24:55"
     },
     {
         "id": "hos41304888",
@@ -242,9 +284,8 @@
         "lb": 800,
         "kt": 5,
         "km": 4,
-        "carport": 0,
         "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-mega-kuningan/dijual-rumah-mega-kuningan-jakarta-selatan-hos41304888/",
-        "waktu_tarik": "2026-04-08 15:20:32"
+        "waktu_tarik": "2026-04-08 15:24:55"
     },
     {
         "id": "hos39637425",
@@ -255,9 +296,8 @@
         "lb": 375,
         "kt": 4,
         "km": 4,
-        "carport": 0,
         "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-kemang/rumah-mewah-baru-4-lantai-ada-lift-di-pusat-jaksel-lokasi-strategis-hos39637425/",
-        "waktu_tarik": "2026-04-08 15:20:32"
+        "waktu_tarik": "2026-04-08 15:24:55"
     },
     {
         "id": "hos39035058",
@@ -268,9 +308,8 @@
         "lb": 60,
         "kt": 3,
         "km": 2,
-        "carport": 0,
         "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-cilandak/dijual-rumah-3-bedroom-di-cilandak-luas-dan-strategis-dekat-mall-toll-rs-kampus-hos39035058/",
-        "waktu_tarik": "2026-04-08 15:20:47"
+        "waktu_tarik": "2026-04-08 15:24:55"
     },
     {
         "id": "hos39786616",
@@ -281,9 +320,8 @@
         "lb": 350,
         "kt": 5,
         "km": 4,
-        "carport": 0,
         "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-kebayoran-lama/lokasi-emas-harga-masih-bisa-nego-rumah-2-lantai-terawat-lebar-18-meter-siap-huni-jalan-johari-kebayoran-lama-jakarta-hos39786616/",
-        "waktu_tarik": "2026-04-08 15:20:47"
+        "waktu_tarik": "2026-04-08 15:24:55"
     },
     {
         "id": "hos41349922",
@@ -294,9 +332,8 @@
         "lb": 340,
         "kt": 5,
         "km": 3,
-        "carport": 0,
         "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-pejaten/dijual-rumah-bagus-siap-huni-dlm-komplek-akses-jln-2mbl-pejaten-hos41349922/",
-        "waktu_tarik": "2026-04-08 15:20:47"
+        "waktu_tarik": "2026-04-08 15:24:55"
     },
     {
         "id": "hos17472053",
@@ -307,9 +344,8 @@
         "lb": 256,
         "kt": 9,
         "km": 6,
-        "carport": 0,
         "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-tebet/murah-area-komersil-tebet-jalan-tebet-barat-dekat-gelael-hos17472053/",
-        "waktu_tarik": "2026-04-08 15:20:47"
+        "waktu_tarik": "2026-04-08 15:24:55"
     },
     {
         "id": "hos41368698",
@@ -320,9 +356,8 @@
         "lb": 359,
         "kt": 4,
         "km": 3,
-        "carport": 0,
         "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-kebayoran-baru/di-jual-townhouse-brand-new-hos41368698/",
-        "waktu_tarik": "2026-04-08 15:20:47"
+        "waktu_tarik": "2026-04-08 15:24:55"
     },
     {
         "id": "hos41370326",
@@ -333,9 +368,8 @@
         "lb": 217,
         "kt": 4,
         "km": 3,
-        "carport": 0,
         "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-kebayoran-baru/dijual-rumah-lama-jalan-lamandau-kebayoran-baru-hos41370326/",
-        "waktu_tarik": "2026-04-08 15:20:47"
+        "waktu_tarik": "2026-04-08 15:24:55"
     },
     {
         "id": "hos41045148",
@@ -346,9 +380,8 @@
         "lb": 450,
         "kt": 7,
         "km": 7,
-        "carport": 0,
         "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-kemang/rumah-mewah-baru-private-pool-area-premiun-kemang-jakarta-selatan-hos41045148/",
-        "waktu_tarik": "2026-04-08 15:20:47"
+        "waktu_tarik": "2026-04-08 15:24:55"
     },
     {
         "id": "hos17126708",
@@ -359,9 +392,8 @@
         "lb": 150,
         "kt": 4,
         "km": 2,
-        "carport": 0,
         "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-tebet/25-lantai-shm-dekat-akses-tol-di-tebet-jakarta-selatan-hos17126708/",
-        "waktu_tarik": "2026-04-08 15:20:47"
+        "waktu_tarik": "2026-04-08 15:24:55"
     },
     {
         "id": "hos41131030",
@@ -372,9 +404,8 @@
         "lb": 359,
         "kt": 4,
         "km": 3,
-        "carport": 0,
         "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-kebayoran-baru/for-sale-brand-new-townhouse-kebayoran-baru-hos41131030/",
-        "waktu_tarik": "2026-04-08 15:20:47"
+        "waktu_tarik": "2026-04-08 15:24:55"
     },
     {
         "id": "hos41369725",
@@ -385,9 +416,8 @@
         "lb": 650,
         "kt": 5,
         "km": 5,
-        "carport": 0,
         "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-lebak-bulus/rumah-cantik-akses-mrt-lebak-bulus-akses-tol-lebak-bulus-hos41369725/",
-        "waktu_tarik": "2026-04-08 15:20:47"
+        "waktu_tarik": "2026-04-08 15:24:55"
     },
     {
         "id": "hos8446427",
@@ -398,9 +428,8 @@
         "lb": 408,
         "kt": 4,
         "km": 4,
-        "carport": 0,
         "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-pondok-indah/rumah-brand-new-mewah-depan-taman-lokasi-tenang-ada-pool-hos8446427/",
-        "waktu_tarik": "2026-04-08 15:20:47"
+        "waktu_tarik": "2026-04-08 15:24:55"
     },
     {
         "id": "hos41370233",
@@ -411,9 +440,8 @@
         "lb": 500,
         "kt": 6,
         "km": 7,
-        "carport": 0,
         "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-pondok-indah/dijual-rumah-mewah-pondok-indah-jakarta-selatan-hos41370233/",
-        "waktu_tarik": "2026-04-08 15:20:47"
+        "waktu_tarik": "2026-04-08 15:24:55"
     },
     {
         "id": "hos40843953",
@@ -424,86 +452,7 @@
         "lb": 124,
         "kt": 4,
         "km": 3,
-        "carport": 0,
         "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-cilandak/rumah-2-lantai-1-carport-bergaya-minimalis-modern-di-cilandak-hos40843953/",
-        "waktu_tarik": "2026-04-08 15:20:47"
-    },
-    {
-        "id": "hos41370166",
-        "judul": "Brand New American Classic di Bintaro Jaya Sektor 3 Posisi Hoek",
-        "harga": "7950000000",
-        "lokasi": "Sektor 3 - Bintaro, Jakarta Selatan",
-        "lt": 250,
-        "lb": 250,
-        "kt": 5,
-        "km": 4,
-        "carport": 0,
-        "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-sektor-3-bintaro/brand-new-american-classic-di-bintaro-jaya-sektor-3-posisi-hoek-hos41370166/",
-        "waktu_tarik": "2026-04-08 15:20:47"
-    },
-    {
-        "id": "hos40246609",
-        "judul": "Rumah Senopati, Jakarta Selatan Bagus Unfurnished SHM",
-        "harga": "28000000000",
-        "lokasi": "Senopati, Jakarta Selatan",
-        "lt": 337,
-        "lb": 300,
-        "kt": 4,
-        "km": 4,
-        "carport": 0,
-        "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-senopati/rumah-senopati-jakarta-selatan-bagus-unfurnished-shm-hos40246609/",
-        "waktu_tarik": "2026-04-08 15:20:47"
-    },
-    {
-        "id": "hos17958144",
-        "judul": "Rumah Hitung Tanah Di Setia Budi Jakarta Selatan",
-        "harga": "7300000000",
-        "lokasi": "Setiabudi, Jakarta Selatan",
-        "lt": 198,
-        "lb": 160,
-        "kt": 8,
-        "km": 8,
-        "carport": 0,
-        "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-setiabudi/rumah-hitung-tanah-di-setia-budi-jakarta-selatan-hos17958144/",
-        "waktu_tarik": "2026-04-08 15:20:47"
-    },
-    {
-        "id": "hos41370092",
-        "judul": "Dijual Rumah Mewah Pondok Indah Jakarta Selatan",
-        "harga": "65000000000",
-        "lokasi": "Pondok Indah, Jakarta Selatan",
-        "lt": 700,
-        "lb": 500,
-        "kt": 6,
-        "km": 7,
-        "carport": 0,
-        "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-pondok-indah/dijual-rumah-mewah-pondok-indah-jakarta-selatan-hos41370092/",
-        "waktu_tarik": "2026-04-08 15:20:47"
-    },
-    {
-        "id": "hos17447331",
-        "judul": "Rumah Dekat Taman, Dekat Perkantoran, di Tebet - Jakarta Selatan",
-        "harga": "2300000000",
-        "lokasi": "Tebet, Jakarta Selatan",
-        "lt": 92,
-        "lb": 92,
-        "kt": 3,
-        "km": 2,
-        "carport": 0,
-        "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-tebet/rumah-dekat-taman-dekat-perkantoran-di-tebet-jakarta-selatan-hos17447331/",
-        "waktu_tarik": "2026-04-08 15:20:47"
-    },
-    {
-        "id": "hos18732729",
-        "judul": "Rumah di Pondok Indah, Dekat Pim, Dekat Akses Tol Jorr",
-        "harga": "26000000000",
-        "lokasi": "Pondok Indah, Jakarta Selatan",
-        "lt": 644,
-        "lb": 442,
-        "kt": 6,
-        "km": 4,
-        "carport": 0,
-        "url_properti": "https://www.rumah123.com/properti/jakarta-selatan-pondok-indah/rumah-di-pondok-indah-dekat-pim-dekat-akses-tol-jorr-hos18732729/",
-        "waktu_tarik": "2026-04-08 15:20:47"
+        "waktu_tarik": "2026-04-08 15:24:55"
     }
 ]
