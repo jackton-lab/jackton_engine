@@ -7,23 +7,55 @@ from pathlib import Path
 from seleniumbase import Driver
 from bs4 import BeautifulSoup
 
-def extract_json_from_html(html):
-    """Mengekstrak data JSON listing dari script tag Rumah123."""
-    # Cari semua script tag
-    soup = BeautifulSoup(html, 'html.parser')
-    scripts = soup.find_all('script')
-    
-    for s in scripts:
-        content = s.string if s.string else ""
-        if 'props' in content and 'initialState' in content and 'listing' in content:
-            try:
-                # Bersihkan jika ada penugasan variabel (misal window.__DATA__ = {...})
-                json_str = re.search(r'({.*})', content).group(1)
-                return json.loads(json_str)
-            except: continue
-    return None
+def parse_price_smart(price_str):
+    if not price_str or "Rp" not in price_str: return 0
+    price_str = price_str.replace("Rp", "").strip()
+    match = re.search(r"([\d,\.]+)\s*(miliar|juta|jt|m)?", price_str, re.IGNORECASE)
+    if not match: return 0
+    val_str = match.group(1).replace(".", "").replace(",", ".")
+    try:
+        val = float(val_str)
+        unit = (match.group(2) or "").lower()
+        if "miliar" in unit or unit == "m": val *= 1_000_000_000
+        elif "juta" in unit or unit == "jt": val *= 1_000_000
+        return int(val)
+    except: return 0
 
-def scrape_rumah123_v57_final():
+def extract_specs_from_card(card_soup):
+    """Ekstraksi data fisik langsung dari elemen kartu (Fallback Mode)."""
+    lt = lb = kt = km = carport = 0
+    text_full = card_soup.get_text(" ").lower()
+    
+    # LT & LB
+    m_lt = re.search(r"lt\s*:?\s*(\d+)", text_full)
+    m_lb = re.search(r"lb\s*:?\s*(\d+)", text_full)
+    if m_lt: lt = int(m_lt.group(1))
+    if m_lb: lb = int(m_lb.group(1))
+    
+    # KT (Bedroom Icon)
+    kt_el = card_soup.find("use", attrs={"xlink:href": re.compile(r"bedroom-icon")})
+    if kt_el:
+        kt_t = kt_el.find_parent("span").get_text(strip=True)
+        m = re.search(r"(\d+)", kt_t)
+        if m: kt = int(m.group(1))
+    
+    # KM (Bathroom Icon)
+    km_el = card_soup.find("use", attrs={"xlink:href": re.compile(r"bathroom-icon")})
+    if km_el:
+        km_t = km_el.find_parent("span").get_text(strip=True)
+        m = re.search(r"(\d+)", km_t)
+        if m: km = int(m.group(1))
+
+    # Carport (Car Icon) - Faktual dari listing
+    cp_el = card_soup.find("use", attrs={"xlink:href": re.compile(r"car-icon|garage-icon")})
+    if cp_el:
+        cp_t = cp_el.find_parent("span").get_text(strip=True)
+        m = re.search(r"(\d+)", cp_t)
+        if m: carport = int(m.group(1))
+        
+    return lt, lb, kt, km, carport
+
+def scrape_rumah123_v58():
     script_dir = Path(__file__).resolve().parent
     output_path = script_dir / 'brankas_data' / 'mentah' / 'properti_mentah.json'
     config_path = script_dir / 'config.json'
@@ -33,7 +65,7 @@ def scrape_rumah123_v57_final():
         cities = config.get("cities", [])
         max_pages = config.get("max_pages_per_city", 1)
 
-    print(f"[*] TRUTH-ENGINE V57 (FINAL): Deep Script Extraction Aktif...")
+    print(f"[*] PRECISION-ENGINE V58: Full Data Integrity Mode Aktif...")
     total_results = []
     seen_ids = set()
     driver = Driver(uc=True, headless=True)
@@ -50,95 +82,59 @@ def scrape_rumah123_v57_final():
                 driver.uc_open_with_reconnect(page_url, 6)
                 time.sleep(8)
                 
-                # SIKAT DARI HTML SCRIPTS
-                data_json = extract_json_from_html(driver.page_source)
+                soup = BeautifulSoup(driver.page_source, 'html.parser')
+                cards = soup.find_all("div", attrs={"data-name": "ldp-listing-card"})
                 
-                listings = []
-                if data_json:
-                    try:
-                        # Jalur 1: initialState
-                        listings = data_json['props']['pageProps']['initialState']['listing']['properties']
-                    except:
-                        try:
-                            # Jalur 2: searchResult
-                            listings = data_json['props']['pageProps']['searchResult']['properties']
-                        except: pass
-                
-                # FALLBACK: Jika JSON gagal, gunakan CSS Selector Presisi (V48)
-                if not listings:
-                    print("    [!] JSON gagal, menggunakan Fallback Precision Selectors...")
-                    soup = BeautifulSoup(driver.page_source, 'html.parser')
-                    cards = soup.find_all("div", attrs={"data-name": "ldp-listing-card"})
+                if not cards:
+                    print("    [!] Tidak ada kartu ditemukan.")
+                    break
                     
-                    added = 0
-                    for card in cards:
-                        try:
-                            link_el = card.find("a", href=re.compile(r"hos\d+"))
-                            if not link_el: continue
-                            url_prop = f"https://www.rumah123.com{link_el['href']}" if link_el['href'].startswith("/") else link_el['href']
-                            
-                            id_match = re.search(r"-(hos\d+)/?$", url_prop)
-                            prop_id = id_match.group(1) if id_match else url_prop
-                            if prop_id in seen_ids: continue
-
-                            # Harga (Selector Asli)
-                            price_el = card.find("span", attrs={"data-testid": "ldp-text-price"})
-                            price_raw = price_el.get_text(strip=True) if price_el else ""
-                            
-                            # Spesifikasi (Selector Asli)
-                            # Carport di Rumah123 SRP biasanya ada di dalam tag 'use' car-icon
-                            carport = 0
-                            cp_el = card.find("use", attrs={"xlink:href": re.compile(r"car-icon|garage-icon")})
-                            if cp_el:
-                                cp_text = cp_el.find_parent("span").get_text(strip=True)
-                                cp_m = re.search(r"(\d+)", cp_text)
-                                if cp_m: carport = int(cp_m.group(1))
-
-                            entry = {
-                                "id": prop_id,
-                                "judul": card.find("h2").get_text(strip=True) if card.find("h2") else "N/A",
-                                "harga": str(re.sub(r"\D", "", price_raw)) if "jt" not in price_raw.lower() else "0", # Handle simple
-                                "url_properti": url_prop,
-                                "carport": carport,
-                                "waktu_tarik": datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-                            }
-                            # ... (sisanya menggunakan fungsi ekstraksi yang sudah teruji)
-                            total_results.append(entry)
-                            seen_ids.add(prop_id)
-                            added += 1
-                        except: continue
-                else:
-                    # PROSES DARI JSON (DATA TERBAIK)
-                    added = 0
-                    for item in listings:
-                        prop_id = str(item.get('id'))
-                        if prop_id in seen_ids: continue
+                added = 0
+                for card in cards:
+                    try:
+                        link_el = card.find("a", href=re.compile(r"hos\d+"))
+                        if not link_el: continue
+                        url_prop = f"https://www.rumah123.com{link_el['href']}" if link_el['href'].startswith("/") else link_el['href']
                         
-                        attrs = item.get('attributes', {})
+                        id_match = re.search(r"-(hos\d+)/?$", url_prop)
+                        prop_id = id_match.group(1) if id_match else url_prop
+                        if prop_id in seen_ids: continue
+
+                        # 1. Harga
+                        price_el = card.find("span", attrs={"data-testid": "ldp-text-price"})
+                        price_val = parse_price_smart(price_el.get_text(strip=True)) if price_el else 0
+                        if price_val == 0: continue
+
+                        # 2. Lokasi Mikro
+                        loc_el = card.find("p", class_=re.compile(r"text-greyText"))
+                        lokasi = loc_el.get_text(strip=True) if loc_el else city_name
+
+                        # 3. Spesifikasi Fisik (LT, LB, KT, KM, Carport)
+                        lt, lb, kt, km, carport = extract_specs_from_card(card)
+
                         entry = {
                             "id": prop_id,
-                            "judul": item.get('title', 'N/A'),
-                            "harga": str(item.get('price', {}).get('value', 0)),
-                            "lokasi": f"{item.get('location', {}).get('district', '')}, {city_name}",
-                            "lt": int(attrs.get('landSize', 0)) if attrs.get('landSize') else 0,
-                            "lb": int(attrs.get('buildingSize', 0)) if attrs.get('buildingSize') else 0,
-                            "kt": int(attrs.get('bedrooms', 0)) if attrs.get('bedrooms') else 0,
-                            "km": int(attrs.get('bathrooms', 0)) if attrs.get('bathrooms') else 0,
-                            "carport": int(attrs.get('carports', 0)) if attrs.get('carports') else 0,
-                            "url_properti": f"https://www.rumah123.com{item.get('url')}",
+                            "judul": card.find("h2").get_text(strip=True) if card.find("h2") else "N/A",
+                            "harga": str(price_val),
+                            "lokasi": lokasi,
+                            "lt": lt, "lb": lb, "kt": kt, "km": km, "carport": carport,
+                            "url_properti": url_prop,
                             "waktu_tarik": datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                         }
+                        
                         total_results.append(entry)
                         seen_ids.add(prop_id)
                         added += 1
-                        print(f"    [OK-JSON] {int(entry['harga'])/1e9:.1f}M | CP:{entry['carport']} | {entry['judul'][:30]}...")
+                        print(f"    [OK] {price_val/1e9:.1f}M | LT:{lt:3} CP:{carport} | {lokasi[:15]} | {entry['judul'][:25]}...")
 
+                    except: continue
+                
                 print(f"--- Selesai Hal {page_num} | Berhasil: {added} ---")
                 with open(output_path, 'w') as f: json.dump(total_results, f, indent=4)
 
     finally:
         driver.quit()
-        print(f"\n[*] SELESAI. Total unik: {len(total_results)}")
+        print(f"\n[*] SELESAI. Total data unik terkumpul: {len(total_results)}")
 
 if __name__ == "__main__":
-    scrape_rumah123_v57_final()
+    scrape_rumah123_v58()
