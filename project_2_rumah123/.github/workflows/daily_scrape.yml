@@ -38,7 +38,7 @@ jobs:
 
       - name: Run AI Analysis (2_ai.py)
         env:
-          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: python 2_ai.py
 
       - name: Run Supabase Upload (4_upload.py)
