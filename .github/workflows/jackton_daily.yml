@@ -1,0 +1,27 @@
+name: Jackton Daily Property Monitor
+on:
+  schedule:
+    - cron: '0 21 * * *'
+  workflow_dispatch:
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+      - name: Run Pipeline
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          python3 project_2_rumah123/1_tarik.py
+          python3 project_2_rumah123/2_ai.py
+          python3 project_2_rumah123/4_upload.py
