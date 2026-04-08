@@ -11,10 +11,10 @@
         "carport": 0,
         "url_properti": "/properti/jakarta-selatan-senopati/rumah-senopati-jakarta-selatan-bagus-unfurnished-shm-hos40246609/",
         "waktu_tarik": "2026-04-08 15:01:27",
-        "skor_investasi": 85,
+        "skor_investasi": 80,
         "klasifikasi": "HOT DEAL",
-        "harga_per_m2": 93333333,
-        "analisis_ai": "Harga 93jt/m2 di Senopati dengan Carport 0 adalah layak, tapi perlu audit lebih lanjut."
+        "harga_per_m2": 83000000,
+        "analisis_ai": "Harga 83jt/m2 di Senopati adalah harga wajar sesuai pasar"
     },
     {
         "id": "hos17958144",
@@ -28,10 +28,10 @@
         "carport": 0,
         "url_properti": "/properti/jakarta-selatan-setiabudi/rumah-hitung-tanah-di-setia-budi-jakarta-selatan-hos17958144/",
         "waktu_tarik": "2026-04-08 15:01:27",
-        "skor_investasi": 40,
-        "klasifikasi": "OVERPRICED",
-        "harga_per_m2": 36785714,
-        "analisis_ai": "Harga 36jt/m2 di Setiabudi dengan Carport 0 adalah overpriced, perlu renegosiasi harga."
+        "skor_investasi": 100,
+        "klasifikasi": "SUPER HOT",
+        "harga_per_m2": 36900000,
+        "analisis_ai": "Harga 37jt/m2 di Setiabudi adalah 59% di bawah rata-rata pasar 90jt/m2"
     },
     {
         "id": "hos41370092",
@@ -45,10 +45,10 @@
         "carport": 0,
         "url_properti": "/properti/jakarta-selatan-pondok-indah/dijual-rumah-mewah-pondok-indah-jakarta-selatan-hos41370092/",
         "waktu_tarik": "2026-04-08 15:01:27",
-        "skor_investasi": 95,
-        "klasifikasi": "SUPER HOT",
-        "harga_per_m2": 130000000,
-        "analisis_ai": "Harga 130jt/m2 di Pondok Indah dengan Carport 0 adalah sangat layak, sangat recomended."
+        "skor_investasi": 60,
+        "klasifikasi": "REGULAR",
+        "harga_per_m2": 92857143,
+        "analisis_ai": "Harga 93jt/m2 di Pondok Indah adalah 3% di atas rata-rata pasar 90jt/m2"
     },
     {
         "id": "hos17447331",
@@ -62,10 +62,10 @@
         "carport": 0,
         "url_properti": "/properti/jakarta-selatan-tebet/rumah-dekat-taman-dekat-perkantoran-di-tebet-jakarta-selatan-hos17447331/",
         "waktu_tarik": "2026-04-08 15:01:27",
-        "skor_investasi": 60,
-        "klasifikasi": "REGULAR",
+        "skor_investasi": 100,
+        "klasifikasi": "SUPER HOT",
         "harga_per_m2": 25000000,
-        "analisis_ai": "Harga 25jt/m2 di Tebet dengan Carport 0 adalah layak, tapi perlu audit lebih lanjut."
+        "analisis_ai": "Harga 25jt/m2 di Tebet adalah 17% di bawah rata-rata pasar 30jt/m2"
     },
     {
         "id": "hos18732729",
@@ -79,10 +79,10 @@
         "carport": 1,
         "url_properti": "/properti/jakarta-selatan-pondok-indah/rumah-di-pondok-indah-dekat-pim-dekat-akses-tol-jorr-hos18732729/",
         "waktu_tarik": "2026-04-08 15:01:27",
-        "skor_investasi": 90,
+        "skor_investasi": 80,
         "klasifikasi": "HOT DEAL",
-        "harga_per_m2": 40451613,
-        "analisis_ai": "Harga 40jt/m2 di Pondok Indah dengan Carport 1 adalah sangat layak, sangat recomended."
+        "harga_per_m2": 40439726,
+        "analisis_ai": "Harga 40jt/m2 di Pondok Indah adalah 20% di bawah rata-rata pasar 50jt/m2"
     },
     {
         "id": "hos41186315",
@@ -96,10 +96,10 @@
         "carport": 0,
         "url_properti": "/properti/jakarta-selatan-kebayoran-baru/hot-sale-pakubuwono-house-for-sale-hos41186315/",
         "waktu_tarik": "2026-04-08 15:01:27",
-        "skor_investasi": 98,
-        "klasifikasi": "SUPER HOT",
-        "harga_per_m2": 136000000,
-        "analisis_ai": "Harga 136jt/m2 di Kebayoran Baru dengan Carport 0 adalah sangat layak, sangat recomended."
+        "skor_investasi": 60,
+        "klasifikasi": "REGULAR",
+        "harga_per_m2": 82951344,
+        "analisis_ai": "Harga 83jt/m2 di Kebayoran Baru adalah 8% di bawah rata-rata pasar 90jt/m2"
     },
     {
         "id": "hos41346334",
@@ -113,10 +113,10 @@
         "carport": 0,
         "url_properti": "/properti/jakarta-selatan-jagakarsa/cash-kpr-tanpa-dp-3-lantai-free-furnish-hos41346334/",
         "waktu_tarik": "2026-04-08 15:01:27",
-        "skor_investasi": 50,
-        "klasifikasi": "OVERPRICED",
-        "harga_per_m2": 16363636,
-        "analisis_ai": "Harga 16jt/m2 di Jagakarsa dengan Carport 0 adalah overpriced, perlu renegosiasi harga."
+        "skor_investasi": 100,
+        "klasifikasi": "SUPER HOT",
+        "harga_per_m2": 28600000,
+        "analisis_ai": "Harga 29jt/m2 di Jagakarsa adalah 61% di atas rata-rata pasar 18jt/m2, tapi masih relatif murah"
     },
     {
         "id": "hos40461335",
@@ -132,8 +132,8 @@
         "waktu_tarik": "2026-04-08 15:01:27",
         "skor_investasi": 80,
         "klasifikasi": "HOT DEAL",
-        "harga_per_m2": 40000000,
-        "analisis_ai": "Harga 40jt/m2 di Cilandak dengan Carport 0 adalah layak, tapi perlu audit lebih lanjut."
+        "harga_per_m2": 35500000,
+        "analisis_ai": "Harga 36jt/m2 di Cilandak adalah 16% di atas rata-rata pasar 30jt/m2"
     },
     {
         "id": "hos41338077",
@@ -147,10 +147,10 @@
         "carport": 0,
         "url_properti": "/properti/jakarta-selatan-pesanggrahan/dijual-rumah-tua-lokasi-startegis-di-pesanggrahan-jakarta-selatan-hos41338077/",
         "waktu_tarik": "2026-04-08 15:01:27",
-        "skor_investasi": 30,
-        "klasifikasi": "OVERPRICED",
-        "harga_per_m2": 16666667,
-        "analisis_ai": "Harga 16jt/m2 di Pesanggrahan dengan Carport 0 adalah overpriced, perlu renegosiasi harga."
+        "skor_investasi": 100,
+        "klasifikasi": "SUPER HOT",
+        "harga_per_m2": 10344828,
+        "analisis_ai": "Harga 10jt/m2 di Pesanggrahan adalah 50% di bawah rata-rata pasar 20jt/m2"
     },
     {
         "id": "hos41356584",
@@ -164,10 +164,10 @@
         "carport": 0,
         "url_properti": "/properti/jakarta-selatan-jagakarsa/rumah-perumahan-mahakam-residence-dki-jakarta-jakarta-selatan-jagakarsa-hos41356584/",
         "waktu_tarik": "2026-04-08 15:01:27",
-        "skor_investasi": 55,
-        "klasifikasi": "REGULAR",
-        "harga_per_m2": 13000000,
-        "analisis_ai": "Harga 13jt/m2 di Jagakarsa dengan Carport 0 adalah layak, tapi perlu audit lebih lanjut."
+        "skor_investasi": 100,
+        "klasifikasi": "SUPER HOT",
+        "harga_per_m2": 17900000,
+        "analisis_ai": "Harga 18jt/m2 di Jagakarsa adalah 2% di atas rata-rata pasar 18jt/m2"
     },
     {
         "id": "hos39563519",
@@ -181,10 +181,10 @@
         "carport": 0,
         "url_properti": "/properti/jakarta-selatan-lebak-bulus/brand-new-house-rumah-dalam-town-house-dekat-mall-di-lebak-bulus-jakarta-selatan-hos39563519/",
         "waktu_tarik": "2026-04-08 15:01:27",
-        "skor_investasi": 65,
-        "klasifikasi": "REGULAR",
-        "harga_per_m2": 18928571,
-        "analisis_ai": "Harga 18.93jt/m2 di Lebak Bulus dengan Carport 0 adalah Harga Pasar, perlu pertimbangan lain."
+        "skor_investasi": 40,
+        "klasifikasi": "OVERPRICED",
+        "harga_per_m2": 43972222,
+        "analisis_ai": "Harga 43,97jt/m2 di Lebak Bulus adalah 143% di atas rata-rata pasar 20jt/m2"
     },
     {
         "id": "hos40645471",
@@ -198,10 +198,10 @@
         "carport": 0,
         "url_properti": "/properti/jakarta-selatan-kemang/new-house-full-furnished-kemang-selatan-hos40645471/",
         "waktu_tarik": "2026-04-08 15:01:27",
-        "skor_investasi": 85,
-        "klasifikasi": "HOT DEAL",
-        "harga_per_m2": 50000000,
-        "analisis_ai": "Harga 50jt/m2 di Kemang dengan Carport 0 adalah Overpriced, tetapi ada nilai tambah lain."
+        "skor_investasi": 20,
+        "klasifikasi": "OVERPRICED",
+        "harga_per_m2": 73529412,
+        "analisis_ai": "Harga 73,53jt/m2 di Kemang adalah 147% di atas rata-rata pasar 30jt/m2"
     },
     {
         "id": "hos40461156",
@@ -215,10 +215,10 @@
         "carport": 0,
         "url_properti": "/properti/jakarta-selatan-cipete/rumah-bagus-2-lt-di-cipete-utara-hos40461156/",
         "waktu_tarik": "2026-04-08 15:01:27",
-        "skor_investasi": 70,
+        "skor_investasi": 60,
         "klasifikasi": "REGULAR",
-        "harga_per_m2": 34035955,
-        "analisis_ai": "Harga 34.04jt/m2 di Cipete dengan Carport 0 adalah Harga Pasar, perlu pertimbangan lain."
+        "harga_per_m2": 17857143,
+        "analisis_ai": "Harga 17,86jt/m2 di Cipete adalah 6% di bawah rata-rata pasar 20jt/m2"
     },
     {
         "id": "hos41253763",
@@ -232,10 +232,10 @@
         "carport": 2,
         "url_properti": "/properti/jakarta-selatan-pondok-indah/rumah-bagus-terawat-siap-huni-di-pondok-indah-jakarta-selatan-hos41253763/",
         "waktu_tarik": "2026-04-08 15:01:27",
-        "skor_investasi": 90,
-        "klasifikasi": "HOT DEAL",
-        "harga_per_m2": 52000000,
-        "analisis_ai": "Harga 52jt/m2 di Pondok Indah dengan Carport 2 adalah Harga Premium, sangat layak investasi."
+        "skor_investasi": 40,
+        "klasifikasi": "OVERPRICED",
+        "harga_per_m2": 63365847,
+        "analisis_ai": "Harga 63,37jt/m2 di Pondok Indah adalah 112% di atas rata-rata pasar 30jt/m2"
     },
     {
         "id": "hos41193519",
@@ -249,10 +249,10 @@
         "carport": 0,
         "url_properti": "/properti/jakarta-selatan-cilandak/jual-bu-dekat-mrt-cipete-rumah-1-lantai-hos41193519/",
         "waktu_tarik": "2026-04-08 15:01:27",
-        "skor_investasi": 75,
-        "klasifikasi": "REGULAR",
-        "harga_per_m2": 56250000,
-        "analisis_ai": "Harga 56.25jt/m2 di Cilandak dengan Carport 0 adalah Harga Pasar, perlu pertimbangan lain."
+        "skor_investasi": 80,
+        "klasifikasi": "HOT DEAL",
+        "harga_per_m2": 24722222,
+        "analisis_ai": "Harga 24,72jt/m2 di Cilandak adalah 24% di atas rata-rata pasar 20jt/m2"
     },
     {
         "id": "hos41370002",
@@ -266,10 +266,10 @@
         "carport": 0,
         "url_properti": "/properti/jakarta-selatan-pondok-indah/dijual-rumah-mewah-pondok-indah-jakarta-selatan-hos41370002/",
         "waktu_tarik": "2026-04-08 15:01:27",
-        "skor_investasi": 95,
-        "klasifikasi": "SUPER HOT",
-        "harga_per_m2": 130000000,
-        "analisis_ai": "Harga 130jt/m2 di Pondok Indah dengan Carport 0 adalah Harga Premium, sangat layak investasi."
+        "skor_investasi": 20,
+        "klasifikasi": "OVERPRICED",
+        "harga_per_m2": 92857143,
+        "analisis_ai": "Harga 92,86jt/m2 di Pondok Indah adalah 209% di atas rata-rata pasar 30jt/m2"
     },
     {
         "id": "hos41369948",
@@ -283,10 +283,10 @@
         "carport": 0,
         "url_properti": "/properti/jakarta-selatan-lebak-bulus/rumah-cantik-dekat-mrt-lebak-bulus-siap-huni-dan-bebas-banjir-hos41369948/",
         "waktu_tarik": "2026-04-08 15:01:27",
-        "skor_investasi": 60,
-        "klasifikasi": "REGULAR",
-        "harga_per_m2": 16153846,
-        "analisis_ai": "Harga 16.15jt/m2 di Lebak Bulus dengan Carport 0 adalah Underpriced, sangat layak audit."
+        "skor_investasi": 90,
+        "klasifikasi": "SUPER HOT",
+        "harga_per_m2": 16129032,
+        "analisis_ai": "Harga 16,13jt/m2 di Lebak Bulus adalah 19% di bawah rata-rata pasar 20jt/m2"
     },
     {
         "id": "hos11370117",
@@ -300,10 +300,10 @@
         "carport": 0,
         "url_properti": "/properti/jakarta-selatan-tebet/rumah-2-lantai-bagus-jl-h-kav-asembaris-tebet-jkt-sel-12830-hos11370117/",
         "waktu_tarik": "2026-04-08 15:01:27",
-        "skor_investasi": 50,
-        "klasifikasi": "OVERPRICED",
-        "harga_per_m2": 19000000,
-        "analisis_ai": "Harga 19jt/m2 di Tebet dengan Carport 0 adalah Harga Pasar, perlu pertimbangan lain."
+        "skor_investasi": 100,
+        "klasifikasi": "SUPER HOT",
+        "harga_per_m2": 19047619,
+        "analisis_ai": "Harga 19,05jt/m2 di Tebet adalah 5% di bawah rata-rata pasar 20jt/m2"
     },
     {
         "id": "hos39637338",
@@ -317,10 +317,10 @@
         "carport": 0,
         "url_properti": "/properti/jakarta-selatan-kebayoran-baru/for-sale-rumah-mewah-kondisi-baru-di-kebayoran-baru-jarang-ada-hos39637338/",
         "waktu_tarik": "2026-04-08 15:01:27",
-        "skor_investasi": 80,
-        "klasifikasi": "HOT DEAL",
-        "harga_per_m2": 18421053,
-        "analisis_ai": "Harga 18.42jt/m2 di Kebayoran Baru dengan Carport 0 adalah Harga Pasar, perlu pertimbangan lain."
+        "skor_investasi": 40,
+        "klasifikasi": "OVERPRICED",
+        "harga_per_m2": 91052632,
+        "analisis_ai": "Harga 91,05jt/m2 di Kebayoran Baru adalah 101% di atas rata-rata pasar 50jt/m2"
     },
     {
         "id": "hos40684537",
@@ -334,10 +334,10 @@
         "carport": 0,
         "url_properti": "/properti/jakarta-selatan-pondok-indah/rumah-mewah-2-lt-european-style-pondok-indah-hos40684537/",
         "waktu_tarik": "2026-04-08 15:01:27",
-        "skor_investasi": 92,
-        "klasifikasi": "SUPER HOT",
-        "harga_per_m2": 95454545,
-        "analisis_ai": "Harga 95.45jt/m2 di Pondok Indah dengan Carport 0 adalah Harga Premium, sangat layak investasi."
+        "skor_investasi": 20,
+        "klasifikasi": "OVERPRICED",
+        "harga_per_m2": 95402366,
+        "analisis_ai": "Harga 95,40jt/m2 di Pondok Indah adalah 218% di atas rata-rata pasar 30jt/m2"
     },
     {
         "id": "hos41131030",
@@ -351,10 +351,10 @@
         "carport": 0,
         "url_properti": "/properti/jakarta-selatan-kebayoran-baru/for-sale-brand-new-townhouse-kebayoran-baru-hos41131030/",
         "waktu_tarik": "2026-04-08 15:01:40",
-        "skor_investasi": 85,
-        "klasifikasi": "HOT DEAL",
-        "harga_per_m2": 70854784,
-        "analisis_ai": "Harga 12,2M di Kebayoran Baru dengan Carport 0 menunjukkan potensi underpriced, perlu audit lebih lanjut."
+        "skor_investasi": 58,
+        "klasifikasi": "OVERPRICED",
+        "harga_per_m2": 70649,
+        "analisis_ai": "Audit Ekonomi: Harga 70.649jt/m2 di Kebayoran Baru adalah 21% di atas rata-rata pasar 58.333jt/m2"
     },
     {
         "id": "hos41243257",
@@ -368,10 +368,10 @@
         "carport": 1,
         "url_properti": "/properti/jakarta-selatan-pondok-indah/rumah-mewah-pondok-indah-boulevard-ukuran-tanah-20x25-bagus-hos41243257/",
         "waktu_tarik": "2026-04-08 15:01:40",
-        "skor_investasi": 70,
-        "klasifikasi": "REGULAR",
-        "harga_per_m2": 45000000,
-        "analisis_ai": "Harga 22,5M di Pondok Indah dengan Carport 1 menunjukkan nilai yang sesuai dengan pasar."
+        "skor_investasi": 44,
+        "klasifikasi": "OVERPRICED",
+        "harga_per_m2": 45000,
+        "analisis_ai": "Audit Ekonomi: Harga 45.000jt/m2 di Pondok Indah adalah 50% di atas rata-rata pasar 30jt/m2"
     },
     {
         "id": "hos40280811",
@@ -385,10 +385,10 @@
         "carport": 0,
         "url_properti": "/properti/jakarta-selatan-kemang/harga-terkoreksi-kemang-townhouse-rumah-modern-luxurious-one-gate-system-lingkungan-tenang-security-24-jam-hos40280811/",
         "waktu_tarik": "2026-04-08 15:01:40",
-        "skor_investasi": 82,
-        "klasifikasi": "HOT DEAL",
-        "harga_per_m2": 34444444,
-        "analisis_ai": "Harga 15,5M di Kemang dengan Carport 0 menunjukkan potensi overpriced, perlu audit lebih lanjut."
+        "skor_investasi": 62,
+        "klasifikasi": "REGULAR",
+        "harga_per_m2": 34444,
+        "analisis_ai": "Audit Ekonomi: Harga 34.444jt/m2 di Kemang adalah 14% di atas rata-rata pasar 30jt/m2"
     },
     {
         "id": "hos41369986",
@@ -402,10 +402,10 @@
         "carport": 0,
         "url_properti": "/properti/jakarta-selatan-pondok-indah/dijual-rumah-mewah-pondok-indah-jakarta-selatan-hos41369986/",
         "waktu_tarik": "2026-04-08 15:01:40",
-        "skor_investasi": 60,
+        "skor_investasi": 42,
         "klasifikasi": "OVERPRICED",
-        "harga_per_m2": 92857143,
-        "analisis_ai": "Harga 65M di Pondok Indah dengan Carport 0 menunjukkan harga yang terlalu tinggi."
+        "harga_per_m2": 92857,
+        "analisis_ai": "Audit Ekonomi: Harga 92.857jt/m2 di Pondok Indah adalah 209% di atas rata-rata pasar 30jt/m2"
     },
     {
         "id": "hos40280830",
@@ -419,10 +419,10 @@
         "carport": 0,
         "url_properti": "/properti/jakarta-selatan-kemang/turun-harga-murah-kemang-rumah-modern-klasik-taman-luas-lingkungan-tenang-hos40280830/",
         "waktu_tarik": "2026-04-08 15:01:40",
-        "skor_investasi": 78,
+        "skor_investasi": 63,
         "klasifikasi": "REGULAR",
-        "harga_per_m2": 42000000,
-        "analisis_ai": "Harga 21M di Kemang dengan Carport 0 menunjukkan nilai yang sesuai dengan pasar."
+        "harga_per_m2": 42000,
+        "analisis_ai": "Audit Ekonomi: Harga 42.000jt/m2 di Kemang adalah 40% di atas rata-rata pasar 30jt/m2"
     },
     {
         "id": "hos41223038",
@@ -436,10 +436,10 @@
         "carport": 0,
         "url_properti": "/properti/jakarta-selatan-cilandak/hunian-ekslusif-karya-atelier-riri-cilandak-jakarta-selatan-hos41223038/",
         "waktu_tarik": "2026-04-08 15:01:40",
-        "skor_investasi": 92,
+        "skor_investasi": 98,
         "klasifikasi": "SUPER HOT",
-        "harga_per_m2": 17410714,
-        "analisis_ai": "Harga 4,89M di Cilandak dengan Carport 0 menunjukkan potensi underpriced, sangat layak audit."
+        "harga_per_m2": 17361,
+        "analisis_ai": "Audit Ekonomi: Harga 17.361jt/m2 di Cilandak adalah 13% di bawah rata-rata pasar 20jt/m2"
     },
     {
         "id": "hos41333466",
@@ -453,10 +453,10 @@
         "carport": 0,
         "url_properti": "/properti/jakarta-selatan-tebet/dekat-akses-tol-2-lantai-shm-dekat-tempat-wisata-bebas-banjir-hos41333466/",
         "waktu_tarik": "2026-04-08 15:01:40",
-        "skor_investasi": 88,
+        "skor_investasi": 95,
         "klasifikasi": "HOT DEAL",
-        "harga_per_m2": 15000000,
-        "analisis_ai": "Harga 3,75M di Tebet dengan Carport 0 menunjukkan potensi underpriced, sangat layak audit."
+        "harga_per_m2": 20547,
+        "analisis_ai": "Audit Ekonomi: Harga 20.547jt/m2 di Tebet adalah 2,7% di atas rata-rata pasar 20jt/m2"
     },
     {
         "id": "hos41199295",
@@ -470,10 +470,10 @@
         "carport": 0,
         "url_properti": "/properti/jakarta-selatan-kebayoran-baru/turun-harga-rumah-dijual-hitung-tanah-dekat-scbd-hos41199295/",
         "waktu_tarik": "2026-04-08 15:01:40",
-        "skor_investasi": 80,
-        "klasifikasi": "REGULAR",
-        "harga_per_m2": 43333333,
-        "analisis_ai": "Harga 16,5M di Kebayoran Baru dengan Carport 0 menunjukkan potensi overpriced, perlu audit lebih lanjut."
+        "skor_investasi": 83,
+        "klasifikasi": "HOT DEAL",
+        "harga_per_m2": 43333,
+        "analisis_ai": "Audit Ekonomi: Harga 43.333jt/m2 di Kebayoran Baru adalah 25% di bawah rata-rata pasar 58.333jt/m2"
     },
     {
         "id": "hos41222203",
@@ -487,10 +487,10 @@
         "carport": 0,
         "url_properti": "/properti/jakarta-selatan-kuningan/for-sale-rumah-lama-bangunan-asri-prime-area-kedutaan-dan-pejabat-dan-perkantoran-area-kuningan-jakarta-selatan-hos41222203/",
         "waktu_tarik": "2026-04-08 15:01:40",
-        "skor_investasi": 58,
+        "skor_investasi": 49,
         "klasifikasi": "OVERPRICED",
-        "harga_per_m2": 42000000,
-        "analisis_ai": "Harga 73,8M di Kuningan dengan Carport 0 menunjukkan harga yang terlalu tinggi."
+        "harga_per_m2": 39913,
+        "analisis_ai": "Audit Ekonomi: Harga 39.913jt/m2 di Kuningan adalah 31% di atas rata-rata pasar 30jt/m2"
     },
     {
         "id": "hos41186067",
@@ -504,10 +504,10 @@
         "carport": 0,
         "url_properti": "/properti/jakarta-selatan-pondok-indah/hot-sale-bukit-golf-pondok-indah-hos41186067/",
         "waktu_tarik": "2026-04-08 15:01:40",
-        "skor_investasi": 55,
+        "skor_investasi": 41,
         "klasifikasi": "OVERPRICED",
-        "harga_per_m2": 97297318,
-        "analisis_ai": "Harga 120M di Pondok Indah dengan Carport 0 menunjukkan harga yang terlalu tinggi."
+        "harga_per_m2": 96748,
+        "analisis_ai": "Audit Ekonomi: Harga 96.748jt/m2 di Pondok Indah adalah 222% di atas rata-rata pasar 30jt/m2"
     },
     {
         "id": "hos41221410",
@@ -521,10 +521,10 @@
         "carport": 0,
         "url_properti": "/properti/jakarta-selatan-ampera/for-sale-rumah-mewah-cantik-modern-murah-dalam-townhouse-area-ampera-kemang-jakarta-selatan-hos41221410/",
         "waktu_tarik": "2026-04-08 15:01:40",
-        "skor_investasi": 82,
+        "skor_investasi": 80,
         "klasifikasi": "HOT DEAL",
-        "harga_per_m2": 26000000,
-        "analisis_ai": "Harga 26jt/m2 di Kemang dengan akses dekat mall adalah harga yang wajar."
+        "harga_per_m2": 46307,
+        "analisis_ai": "Harga 46jt/m2 di Ampera adalah sesuai dengan rata-rata pasar 30-50jt/m2"
     },
     {
         "id": "hos41190810",
@@ -538,10 +538,10 @@
         "carport": 0,
         "url_properti": "/properti/jakarta-selatan-cilandak/jual-cepat-rumah-2-lantai-cilandak-barat-hos41190810/",
         "waktu_tarik": "2026-04-08 15:01:40",
-        "skor_investasi": 85,
-        "klasifikasi": "HOT DEAL",
-        "harga_per_m2": 39250000,
-        "analisis_ai": "Harga 39jt/m2 di Cilandak dengan akses dekat tol adalah harga yang wajar."
+        "skor_investasi": 40,
+        "klasifikasi": "OVERPRICED",
+        "harga_per_m2": 39258,
+        "analisis_ai": "Harga 39jt/m2 di Cilandak adalah 31% di atas rata-rata pasar 20-30jt/m2"
     },
     {
         "id": "hos41369952",
@@ -555,10 +555,10 @@
         "carport": 0,
         "url_properti": "/properti/jakarta-selatan-pondok-indah/dijual-rumah-mewah-pondok-indah-jakarta-selatan-hos41369952/",
         "waktu_tarik": "2026-04-08 15:01:40",
-        "skor_investasi": 95,
-        "klasifikasi": "SUPER HOT",
-        "harga_per_m2": 130000000,
-        "analisis_ai": "Harga 130jt/m2 di Pondok Indah dengan akses dekat mall adalah harga yang sangat wajar."
+        "skor_investasi": 0,
+        "klasifikasi": "OVERPRICED",
+        "harga_per_m2": 92857,
+        "analisis_ai": "Harga 93jt/m2 di Pondok Indah adalah 86% di atas rata-rata pasar 30-50jt/m2"
     },
     {
         "id": "hos41191124",
@@ -572,10 +572,10 @@
         "carport": 0,
         "url_properti": "/properti/jakarta-selatan-kebayoran-baru/rumah-kebayoran-baru-jakarta-selatan-460m2-lokasi-bagus-hos41191124/",
         "waktu_tarik": "2026-04-08 15:01:40",
-        "skor_investasi": 80,
-        "klasifikasi": "HOT DEAL",
-        "harga_per_m2": 58700000,
-        "analisis_ai": "Harga 58jt/m2 di Kebayoran Baru dengan akses dekat tol adalah harga yang wajar."
+        "skor_investasi": 40,
+        "klasifikasi": "OVERPRICED",
+        "harga_per_m2": 58701,
+        "analisis_ai": "Harga 59jt/m2 di Kebayoran Baru adalah 10% di atas rata-rata pasar 50-90jt/m2, tapi harga properti ini masih terlalu rendah dibandingkan luas tanah"
     },
     {
         "id": "hos39604846",
@@ -589,10 +589,10 @@
         "carport": 0,
         "url_properti": "/properti/jakarta-selatan-pondok-indah/rumah-pondok-indah-dekat-mall-5-kamar-tidur-hos39604846/",
         "waktu_tarik": "2026-04-08 15:01:40",
-        "skor_investasi": 78,
-        "klasifikasi": "REGULAR",
-        "harga_per_m2": 50000000,
-        "analisis_ai": "Harga 50jt/m2 di Pondok Indah dengan akses dekat mall adalah harga yang wajar."
+        "skor_investasi": 80,
+        "klasifikasi": "HOT DEAL",
+        "harga_per_m2": 50000,
+        "analisis_ai": "Harga 50jt/m2 di Pondok Indah adalah sesuai dengan rata-rata pasar 30-50jt/m2"
     },
     {
         "id": "hos41348956",
@@ -606,10 +606,10 @@
         "carport": 0,
         "url_properti": "/properti/jakarta-selatan-kemang/for-sale-house-modern-minimalis-dekat-kemang-raya-area-kemang-jakarta-selatan-hos41348956/",
         "waktu_tarik": "2026-04-08 15:01:40",
-        "skor_investasi": 88,
+        "skor_investasi": 80,
         "klasifikasi": "HOT DEAL",
-        "harga_per_m2": 27300000,
-        "analisis_ai": "Harga 27jt/m2 di Kemang dengan akses dekat mall adalah harga yang wajar."
+        "harga_per_m2": 27397,
+        "analisis_ai": "Harga 27jt/m2 di Kemang adalah sesuai dengan rata-rata pasar 30-50jt/m2"
     },
     {
         "id": "hos41287481",
@@ -623,10 +623,10 @@
         "carport": 0,
         "url_properti": "/properti/jakarta-selatan-cilandak/rumah-hadap-timur-6-menit-ke-gerbang-tol-ciputat-siap-kpr-j44917-hos41287481/",
         "waktu_tarik": "2026-04-08 15:01:40",
-        "skor_investasi": 83,
-        "klasifikasi": "HOT DEAL",
-        "harga_per_m2": 25600000,
-        "analisis_ai": "Harga 25jt/m2 di Cilandak dengan akses dekat tol adalah harga yang wajar."
+        "skor_investasi": 60,
+        "klasifikasi": "REGULAR",
+        "harga_per_m2": 25621,
+        "analisis_ai": "Harga 26jt/m2 di Cilandak adalah sedikit di bawah rata-rata pasar 20-30jt/m2"
     },
     {
         "id": "hos41333655",
@@ -640,10 +640,10 @@
         "carport": 2,
         "url_properti": "/properti/jakarta-selatan-bintaro/dekat-akses-tol-shmdi-jakarta-selatan-hos41333655/",
         "waktu_tarik": "2026-04-08 15:01:40",
-        "skor_investasi": 65,
-        "klasifikasi": "REGULAR",
-        "harga_per_m2": 15400000,
-        "analisis_ai": "Harga 15jt/m2 di Bintaro dengan carport 2 adalah underpriced."
+        "skor_investasi": 100,
+        "klasifikasi": "SUPER HOT",
+        "harga_per_m2": 15444,
+        "analisis_ai": "Harga 15jt/m2 di Bintaro adalah 25% di bawah rata-rata pasar 20-30jt/m2"
     },
     {
         "id": "hos40247529",
@@ -657,10 +657,10 @@
         "carport": 0,
         "url_properti": "/properti/jakarta-selatan-cilandak/rumah-brand-new-bagus-cilandak-jakarta-selatan-shm-hos40247529/",
         "waktu_tarik": "2026-04-08 15:01:40",
-        "skor_investasi": 75,
-        "klasifikasi": "REGULAR",
-        "harga_per_m2": 21250000,
-        "analisis_ai": "Harga 21jt/m2 di Cilandak dengan akses dekat tol adalah harga yang wajar."
+        "skor_investasi": 40,
+        "klasifikasi": "OVERPRICED",
+        "harga_per_m2": 21250,
+        "analisis_ai": "Harga 21jt/m2 di Cilandak adalah sedikit di atas rata-rata pasar 20-30jt/m2"
     },
     {
         "id": "hos41181454",
@@ -674,9 +674,9 @@
         "carport": 0,
         "url_properti": "/properti/jakarta-selatan-cipete/selangkah-ke-sekolah-perancis-rumah-modern-siap-huni-2-lantai-ada-pool-jalan-lebar-hos41181454/",
         "waktu_tarik": "2026-04-08 15:01:40",
-        "skor_investasi": 70,
-        "klasifikasi": "REGULAR",
-        "harga_per_m2": 32150000,
-        "analisis_ai": "Harga 32jt/m2 di Cipete dengan akses dekat sekolah adalah harga yang wajar."
+        "skor_investasi": 80,
+        "klasifikasi": "HOT DEAL",
+        "harga_per_m2": 32215,
+        "analisis_ai": "Harga 32jt/m2 di Cipete adalah sesuai dengan rata-rata pasar 20-30jt/m2"
     }
 ]

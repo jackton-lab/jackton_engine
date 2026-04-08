@@ -6,38 +6,42 @@ from pathlib import Path
 from dotenv import load_dotenv
 from groq import Groq
 
-# NEURAL ENGINE V56 - MULTI-FACTOR MARKET AUDITOR
-# Menilai berdasarkan perbandingan sub-daerah, akses, dan kapasitas parkir.
+# NEURAL ENGINE V57 - THE STATISTICAL AUDITOR
+# Fokus murni pada perbandingan harga pasar per sub-daerah. 
+# Menghapus asumsi kondisi fisik yang subjektif.
 
-async def analyze_batch_v56(batch, client):
-    """Menganalisis batch dengan Kamus Harga Pasar Jakarta Selatan."""
+async def analyze_batch_v57(batch, client):
+    """Audit ekonomi berbasis data pasar riil Jakarta Selatan."""
     prompt = f"""
-    Anda adalah Senior Real Estate Appraiser di Jakarta Selatan.
-    Gunakan referensi harga pasar tanah per m2 ini sebagai dasar:
-    - Kebayoran Baru / Pondok Indah / Senopati: 45jt - 80jt /m2
-    - Kemang / Dharmawangsa / Cilandak: 25jt - 40jt /m2
-    - Tebet / Pancoran / Mampang: 20jt - 30jt /m2
-    - Jagakarsa / Pasar Minggu / Lenteng Agung: 12jt - 18jt /m2
-    
-    DATA BATCH: {json.dumps(batch)}
-    
-    Tugas:
-    1. Hitung Harga/m2 Properti.
-    2. Audit Akses & Fasilitas: 
-       - Beri nilai tinggi jika judul/lokasi mengandung "MRT", "Tol", "Dekat Mall".
-       - Carport > 1 adalah nilai tambah besar.
-    3. Skor Investasi (0-100):
-       - Bobot: 40% Harga vs Pasar Sub-Daerah, 30% Akses, 20% Kapasitas Parkir (Carport), 10% Kondisi Fisik (KT/KM).
-    4. Klasifikasi: 'SUPER HOT' (>90), 'HOT DEAL' (80-89), 'REGULAR' (60-79), 'OVERPRICED' (<60).
-    
-    Hasilkan JSON ARRAY:
+    Anda adalah Auditor Ekonomi Properti Jakarta Selatan. 
+    Tugas Anda adalah melakukan audit statistik antara data listing dengan rata-rata harga pasar.
+
+    DAFTAR HARGA PASAR TANAH (m2) SEBAGAI REFERENSI:
+    - Kebayoran Baru, Senopati, Dharmawangsa: 50jt - 90jt
+    - Pondok Indah, Kemang: 30jt - 50jt
+    - Cilandak, Tebet, Pancoran: 20jt - 30jt
+    - Jagakarsa, Pasar Minggu, Lenteng Agung: 10jt - 18jt
+
+    DATA UNTUK DIAUDIT: {json.dumps(batch)}
+
+    INSTRUKSI AUDIT:
+    1. Hitung Harga/m2 secara eksak (Harga / LT).
+    2. Bandingkan dengan referensi sub-daerah di atas.
+    3. Skor Investasi (0-100): 
+       - 100: Sangat Murah (Harga/m2 jauh di bawah pasar).
+       - 80: Harga Wajar (Sesuai pasar).
+       - <60: Mahal (Overpriced).
+    4. Analisis Audit: Berikan fakta perbandingan harga (Contoh: "Harga 15jt/m2 di Cilandak adalah 25% di bawah rata-rata pasar 20jt/m2"). 
+    5. JANGAN berasumsi tentang kondisi rumah, kejujuran penjual, atau hal lain yang tidak ada dalam data angka.
+
+    OUTPUT JSON ARRAY:
     [
       {{
-        "id": "hos...",
+        "id": "...",
         "skor_investasi": int,
-        "klasifikasi": "...",
+        "klasifikasi": "SUPER HOT" / "HOT DEAL" / "REGULAR" / "OVERPRICED",
         "harga_per_m2": int,
-        "analisis_audit": "Analisis teknis: Harga 15jt/m2 di Tebet dengan Carport 2 adalah Underpriced, sangat layak audit."
+        "analisis_audit": "Audit Ekonomi: [Fakta Angka]"
       }}
     ]
     HANYA JSON murni.
@@ -66,15 +70,14 @@ async def run_ai_analysis():
     if not input_path.exists(): return
     with open(input_path, 'r') as f: raw_data = json.load(f)
 
-    print(f"[*] NEURAL ENGINE V56: Memulai Audit Pasar Jakarta Selatan...")
+    print(f"[*] NEURAL ENGINE V57: Memulai Audit Ekonomi Jakarta Selatan...")
     client = Groq(api_key=os.getenv("GROQ_API_KEY"))
     analyzed_data = []
-    batch_size = 10
     
-    for i in range(0, len(raw_data), batch_size):
-        batch = raw_data[i:i+batch_size]
-        print(f"    [>] Audit Market Batch {i//batch_size + 1}...", end="\r")
-        results = await analyze_batch_v56(batch, client)
+    for i in range(0, len(raw_data), 10):
+        batch = raw_data[i:i+10]
+        print(f"    [>] Audit Market Batch {i//10 + 1}...", end="\r")
+        results = await analyze_batch_v57(batch, client)
         if results:
             results_dict = {res['id']: res for res in results if 'id' in res}
             for item in batch:
@@ -90,7 +93,7 @@ async def run_ai_analysis():
         await asyncio.sleep(1)
 
     with open(output_path, 'w') as f: json.dump(analyzed_data, f, indent=4)
-    print(f"\n[SUCCESS] AUDIT MARKET SELESAI!")
+    print(f"\n[SUCCESS] AUDIT EKONOMI SELESAI!")
 
 if __name__ == "__main__":
     asyncio.run(run_ai_analysis())
