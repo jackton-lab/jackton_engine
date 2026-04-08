@@ -486,6 +486,7 @@
 
   <script>
     const SUPABASE_URL = 'https://onqoskejkwhyordqevgd.supabase.co';
+    // MENGGUNAKAN ANON KEY (Aman untuk Client-side)
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9ucW9za2Vqa3doeW9yZHFldmdkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUyOTczNTMsImV4cCI6MjA5MDg3MzM1M30.TJROEllC7VjZ7ydqG1e-D3L2SuDcTCyp61hzqWq941w';
     
     let supabaseClient, propertyData = [];
@@ -574,7 +575,13 @@
     }
 
     async function fetchInitialData() {
-      const { data, error } = await supabaseClient.from('daily_hot_deals').select('*').limit(8);
+      // Mengambil dari tabel 'investments' sesuai sistem scraping
+      const { data, error } = await supabaseClient
+        .from('investments')
+        .select('url_asli, harga_total, klasifikasi, kota')
+        .order('created_at', { ascending: false })
+        .limit(8);
+        
       if (!error) propertyData = data;
     }
 
@@ -618,12 +625,16 @@
     function renderDataMatrix() {
       const dataBody = document.getElementById('bbg-data-matrix');
       if (!dataBody) return;
-      let html = "<span class='bbg-white'>TICKER     ZONING    ASK_PX   SPREAD</span>\n--------------------------------------\n";
+      let html = "<span class='bbg-white'>TICKER     LOCATION  ASK_PX   SPREAD</span>\n--------------------------------------\n";
       propertyData.forEach((deal, i) => {
-        const priceF = (deal.harga_total / 1e9).toFixed(2) + 'B';
+        const priceF = deal.harga_total ? (deal.harga_total / 1e9).toFixed(1) + 'B' : 'N/A';
         const margin = 1.15 + (Math.random() * 0.1); 
         const yieldT = '+' + ((margin - 1) * 100).toFixed(1) + '%';
-        html += `<span class='bbg-cyan'>${('JKT0'+(i+1)).padEnd(10, ' ')}</span>${deal.klasifikasi.toUpperCase().substring(0, 8).padEnd(10, ' ')}<span class='bbg-white'>${priceF.padEnd(8, ' ')}</span><span class='bbg-green'>${yieldT}</span>\n`;
+        
+        // Gunakan 'kota' sebagai identitas lokasi
+        const location = (deal.kota || 'N/A').toUpperCase().substring(0, 8);
+        
+        html += `<span class='bbg-cyan'>${('JKT0'+(i+1)).padEnd(10, ' ')}</span>${location.padEnd(10, ' ')}<span class='bbg-white'>${priceF.padEnd(8, ' ')}</span><span class='bbg-green'>${yieldT}</span>\n`;
       });
       dataBody.innerHTML = html;
     }

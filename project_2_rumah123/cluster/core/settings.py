@@ -8,8 +8,13 @@ NEWSPIDER_MODULE = 'core.spiders'
 # Memungkinkan Spider di-pause/resume dan membagi beban ke ratusan Worker
 SCHEDULER = "scrapy_redis.scheduler.Scheduler"
 DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
-SCHEDULER_PERSIST = True
+SCHEDULER_PERSIST = False # Matikan persist agar antrean bersih setelah selesai
 REDIS_URL = 'redis://redis:6379'
+
+# Matikan Worker jika antrean kosong (5 menit idle)
+SCHEDULER_IDLE_BEFORE_CLOSE = 300
+CLOSESPIDER_IDLE_TIMEOUT = 300
+CLOSESPIDER_TIMEOUT = 3600 # Maksimal 1 jam per sesi agar tidak over-run
 
 # ==========================================
 # 2. BEHAVIORAL SIMULATION (STEALTH)

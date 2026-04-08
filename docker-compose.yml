@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  # MESSAGE BROKER (Sistem Otak Pusat)
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    restart: always
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+
+  # MASTER ORCHESTRATOR (Mengantrekan Jutaan URL ke Redis)
+  master:
+    build: ./project_2_rumah123/cluster
+    depends_on:
+      - redis
+    env_file:
+      - .env
+    command: python /app/core/master_orchestrator.py
+
+  # WORKER NODES (Pasukan Eksekutor - Bisa Di-Scale via Docker Swarm/K8s)
+  worker:
+    build: ./project_2_rumah123/cluster
+    depends_on:
+      - redis
+    env_file:
+      - .env
+    # Jalankan Spider yang terus-menerus mendengarkan perintah Redis
+    command: scrapy runspider /app/core/spiders/rumah123_spider.py
+    deploy:
+      mode: replicated
+      replicas: 5 # Default: Pasukan 5 Mesin Serentak
+
+volumes:
+  redis_data:
