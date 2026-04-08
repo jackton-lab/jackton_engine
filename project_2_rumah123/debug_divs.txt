@@ -1,0 +1,50 @@
+Class: None | ID: None
+Class: ['relative', 'z-[3]', 'flex', 'w-full', 'h-14', 'lg:h-16', 'justify-center', 'items-center', 'py-3', 'px-4', 'md:px-6', 'xl:px-0', 'max-sm:py-3', 'bg-white'] | ID: None
+Class: ['flex', 'justify-between', 'items-center', 'w-full', 'max-w-full', 'lg:max-w-[1140px]', 'gap-1', 'md:gap-6'] | ID: None
+Class: ['flex-1', 'flex', 'items-center', 'gap-1', 'md:gap-6'] | ID: None
+Class: ['md:hidden'] | ID: None
+Class: ['flex', 'md:flex', 'max-w-[200px]', 'overflow-hidden', 'transition-all', 'duration-500', 'ease-in-out'] | ID: None
+Class: ['hidden', 'flex-1', 'min-[810px]:flex', 'justify-center', 'items-center', 'transition-all', 'duration-500', 'ease-in-out', 'opacity-0'] | ID: None
+Class: ['relative', 'flex', 'items-center', 'gap-4', 'lg:gap-2', 'z-[1]', 'text-accent'] | ID: None
+Class: ['flex', 'md:flex'] | ID: None
+Class: ['hidden', 'lg:flex', 'items-center', 'gap-2', 'ml-2'] | ID: None
+Class: ['relative'] | ID: None
+Class: ['absolute', 'items-start', 'bg-white', 'w-[232px]', 'h-auto', 'min-h-[168px]', 'flex', 'flex-col', 'transition-all', 'duration-100', 'ease-in-out', 'shadow-[0px_0px_2px_0px_rgba(40,41,61,0.04),0px_4px_8px_0px_rgba(96,97,112,0.16)]', 'p-4', 'rounded-lg', '-right-3', 'top-10', 'after:w-3', 'after:h-2', 'after:absolute', 'after:bg-[pink]', 'after:right-0', 'after:top-0', 'invisible', 'opacity-0', 'scale-90'] | ID: None
+Class: ['flex', 'items-center', 'gap-1.5'] | ID: None
+Class: ['flex', 'items-center', 'gap-1.5'] | ID: None
+Class: ['flex', 'items-center', 'gap-1.5'] | ID: None
+Class: ['flex', 'items-center', 'gap-1.5'] | ID: None
+Class: ['flex', 'items-center', 'gap-1.5'] | ID: None
+Class: ['flex', 'items-center', 'gap-1.5'] | ID: None
+Class: ['flex', 'items-center', 'gap-1.5'] | ID: None
+Class: ['relative'] | ID: None
+Class: ['navbar-account-desktop', 'absolute', 'grid', 'grid-rows-[0fr]', 'transition-[grid]', 'ease-[cubic-bezier(0.75,0,0.25,1)]', 'rounded-b-lg', 'peer-checked:grid-rows-[1fr]', 'overflow-visible', 'top-full', 'right-0', 'w-[360px]', 'translate-y-2.5', 'rounded-t-lg'] | ID: None
+Class: ['peer-checked:transition-[padding]', 'peer-checked:delay-150', 'overflow-hidden'] | ID: None
+Class: ['p-6', 'bg-white', 'rounded-lg'] | ID: None
+Class: ['navbar-account-info', 'flex', 'flex-col', 'gap-2', 'items-start', 'w-full'] | ID: None
+Class: ['flex', 'items-center', 'gap-x-2'] | ID: None
+Class: ['navbar-sticky-desktop', 'block', 'md:max-h-[60vh]', 'md:overflow-y-scroll', 'no-scrollbar'] | ID: None
+Class: ['flex', 'flex-col', 'gap-y-2', 'items-stretch', 'mb-4'] | ID: None
+Class: ['flex', 'flex-col', 'gap-2', 'items-stretch'] | ID: None
+Class: ['bg-gray-200', 'rounded'] | ID: None
+Class: ['text-accent'] | ID: None
+Class: ['bg-gray-200', 'rounded'] | ID: None
+Class: ['text-accent'] | ID: None
+Class: ['mb-4', 'flex', 'flex-col', 'gap-2', 'w-full'] | ID: None
+Class: ['grid', 'grid-cols-3', 'gap-2', 'w-full'] | ID: None
+Class: ['bg-gray-200', 'rounded'] | ID: None
+Class: ['bg-gray-200', 'rounded'] | ID: None
+Class: ['bg-gray-200', 'rounded'] | ID: None
+Class: ['isolate'] | ID: None
+Class: ['bg-white', 'top-0', 'sticky', 'z-10', 'pb-4', 'md:pt-4', 'transition-all'] | ID: None
+Class: ['ui-container', 'flex', 'items-center', 'gap-x-4', 'overflow-hidden', 'md:overflow-visible'] | ID: None
+Class: ['w-[650px]', 'rounded-lg', 'border', 'border-solid', 'border-greyDarker', 'relative'] | ID: None
+Class: ['w-full', 'p-1', 'flex', 'relative', 'rounded-lg', 'bg-white', 'justify-between', 'border', 'border-greyDarker', 'md:overflow-hidden', 'items-center'] | ID: None
+Class: ['flex', 'items-center', 'gap-1', 'p-1', 'overflow-hidden', 'w-full', 'md:w-[calc(100%-32px)]'] | ID: None
+Class: ['h-5', 'w-5', 'bg-gray-100', 'rounded'] | ID: None
+Class: ['w-[calc(100%-36px)]'] | ID: None
+Class: ['w-full', 'border-none', 'text-sm', 'font-medium', 'leading-6', 'text-left', 'bg-white', 'text-greyText'] | ID: None
+Class: ['ui-container', 'mt-4', 'flex', 'md:hidden'] | ID: None
+Class: ['flex', 'w-full', 'max-w-[650px]', 'gap-x-2', 'overflow-x-auto', 'no-scrollbar'] | ID: None
+Class: ['disable-selection', 'cursor-pointer', 'flex-none', 'flex', 'gap-1', 'items-center', 'border-solid', 'border', 'px-2', 'py-1.5', 'rounded-lg', 'text-sm', 'tracking-tight', 'border-gray-200'] | ID: None
+Class: ['disable-selection', 'cursor-pointer', 'flex-none', 'flex', 'gap-1', 'items-center', 'border-solid', 'border', 'px-2', 'py-1.5', 'rounded-lg', 'text-sm', 'tracking-tight', 'border-gray-200'] | ID: None

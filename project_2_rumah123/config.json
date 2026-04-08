@@ -1,0 +1,6 @@
+{
+  "cities": [
+    {"nama": "Jakarta Selatan", "slug": "jakarta-selatan"}
+  ],
+  "max_pages_per_city": 2
+}

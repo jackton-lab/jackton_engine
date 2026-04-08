@@ -1,0 +1,56 @@
+name: Daily Property Scraping
+
+on:
+  schedule:
+    # Jam 4 pagi WIB (UTC+7) = Jam 9 malam UTC
+    - cron: '0 21 * * *'
+  workflow_dispatch: # Memungkinkan jalan manual
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/checkout@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install seleniumbase beautifulsoup4 google-generativeai supabase python-dotenv
+
+      - name: Install Browser for Selenium
+        run: |
+          sbase install chromedriver
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+      - name: Run Scraping (1_tarik.py)
+        env:
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: python 1_tarik.py
+
+      - name: Run AI Analysis (2_ai.py)
+        env:
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        run: python 2_ai.py
+
+      - name: Run Supabase Upload (4_upload.py)
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: python 4_upload.py
+
+      - name: Commit and Push Changes (Data Archive)
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add brankas_data/
+          git commit -m "Auto-update property data: $(date)" || echo "No changes to commit"
+          git push

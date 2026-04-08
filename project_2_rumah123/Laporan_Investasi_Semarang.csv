@@ -1,11 +1,3 @@
 SKOR,KLASIFIKASI,LOKASI,JUDUL,HARGA_TOTAL,HARGA_M2,SUMMARY
-75,REGULAR,N/A,Bawah Harga Appraisal Bank Rumah Dekat The Park Mall di Amar,"Rp 2,800,000,000","Rp 12,121,212","Harga per m2 masih tergolong standar pasar, tidak ada urgensi yang signifikan untuk membeli properti ini."
-75,REGULAR,Tembalang,Kosan Ready Dekat Kampus Undip Tembalang,"Rp 765,000,000","Rp 11,086,207","Harga per m2 sebesar Rp 11.086.207 masih tergolong standar pasar daerah, sehingga tidak ada indikasi urgensi yang kuat untuk membeli properti ini."
-74,REGULAR,Tembalang,Rumah Ready di Tembalang Dekat Kampus Undip,"Rp 760,000,000","Rp 10,555,556",Harga per m2 rumah ini tidak terlalu rendah dibandingkan dengan standar pasar daerah tersebut sehingga tidak dapat dikategorikan sebagai HOT DEAL.
-72,REGULAR,Tembalang,Dekat Kampus Undip!! Kos 12 Kamar SHM 1M An Tembalang Semara,"Rp 1,000,000,000","Rp 9,900,990","Harga per m2 properti ini sebesar Rp 9.900.990, yang masih tergolong wajar untuk daerah Tembalang, Semarang, tetapi tidak termasuk dalam kategori HOT DEAL karena tidak ada indikator urgensi yang signifikan."
-70,REGULAR,N/A,"Rumah Di Forest Hill Citraland Bsb , Murah Kondisi Siap Paka","Rp 1,000,000,000","Rp 8,333,333",Harga per m2 Rp 8.333.333 tidak termasuk murah dan sesuai standar pasar di daerah tersebut.
-70,REGULAR,Tembalang,Rumah Mewah Semi Furnished Ada Kolam Renang di Bulusan Temba,"Rp 5,500,000,000","Rp 957,173","Harga per m2 rumah ini sebesar Rp 957.173, masuk akal dan sesuai dengan standar pasar daerah Tembalang, Semarang."
-69,REGULAR,"Tembalang, Semarang","Rumah Hook Ngesrep, Belakang Lombok Idjo Sebelum Gombel","Rp 2,750,000,000","Rp 13,891,139",Harga per m2 tidak terlalu kompetitif dibandingkan dengan standar pasar daerah tersebut.
-0,REGULAR,"Tembalang, Semarang",GRAND CALATHEA,"Rp 375,000,000",N/A,"Listing ini tidak dapat dihitung secara matematis karena tidak menyediakan informasi tentang Luas Tanah, sehingga tidak dapat diverifikasi sebagai peluang investasi yang baik."
-0,REGULAR,"Gunung Pati, Semarang",Green Permata Village,"Rp 483,000,000",N/A,Listing ini tidak dapat diaudit secara akurat karena tidak mencantumkan informasi luas tanah yang valid.
-0,REGULAR,"Ungaran Timur, Semarang",The Daarra Exclusive Residence - Ungaran,"Rp 1,100,000,000",N/A,"Klaim judul tidak bisa diverifikasi karena kurangnya informasi tentang luas tanah, membuat skor investasi tidak dapat dihitung secara akurat."
+85,HOT DEAL,"Tembalang, Semarang",Rumah Murah di Tembalang Semarang BU,"Rp 1,200,000,000","Rp 7,000,000",Analisis simulasi: Harga masuk akal.
+65,REGULAR,Semarang Tengah,Rumah Mewah Simpang Lima Semarang,"Rp 5,000,000,000","Rp 7,000,000",Analisis simulasi: Harga masuk akal.

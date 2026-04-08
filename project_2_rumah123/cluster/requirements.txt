@@ -1,0 +1,11 @@
+scrapy>=2.11.0
+scrapy-redis>=0.7.3
+scrapy-playwright>=0.0.33
+scrapy-user-agents>=0.1.1
+supabase>=2.3.0
+python-dotenv>=1.0.0
+redis>=5.0.1
+pydoll
+crawlee
+curl-cffi
+browserforge
