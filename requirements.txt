@@ -1,0 +1,9 @@
+requests
+beautifulsoup4
+pandas
+python-dotenv
+supabase
+groq
+openai
+google-genai
+playwright
