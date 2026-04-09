@@ -1,3 +1,7 @@
+scrapy
+scrapy-redis
+scrapy-playwright
+playwright
 seleniumbase
 beautifulsoup4==4.12.2
 google-generativeai
@@ -5,3 +9,4 @@ supabase
 python-dotenv
 groq
 psycopg2-binary
+scrapy-user-agents
