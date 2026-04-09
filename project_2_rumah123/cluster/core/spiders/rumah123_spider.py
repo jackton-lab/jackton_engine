@@ -52,6 +52,11 @@ class Rumah123ClusterSpider(RedisSpider):
                     # Tambahan: Ambil Lokasi/Kota
                     location_el = await card.query_selector(".ui-molecule-property-card__location, .ui-atomic-text")
                     location = await location_el.inner_text() if location_el else ""
+
+                    # Tambahan: Ambil Spesifikasi (LT, LB, KT, KM)
+                    # Kita ambil seluruh teks di dalam card untuk diproses di pipeline
+                    spec_el = await card.query_selector(".ui-molecule-property-card__facilities-list, .ui-organism-property-card__facilities")
+                    spec_raw = await spec_el.inner_text() if spec_el else ""
                     
                     if not raw_url: continue
 
@@ -60,7 +65,8 @@ class Rumah123ClusterSpider(RedisSpider):
                         "judul": title.strip(),
                         "url_asli": f"https://www.rumah123.com{raw_url}" if raw_url.startswith("/") else raw_url,
                         "harga_raw": price_raw.strip(),
-                        "lokasi": location.strip()
+                        "lokasi": location.strip(),
+                        "spec_raw": spec_raw.strip()
                     }
                 except Exception as e:
                     self.logger.error(f"Error parsing card: {e}")
