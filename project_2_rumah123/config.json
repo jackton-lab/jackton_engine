@@ -1,7 +1,25 @@
 {
     "cities": [
-        {"nama": "Bekasi", "slug": "bekasi"}
+        {"nama": "Jakarta Selatan", "slug": "jakarta-selatan"},
+        {"nama": "Jakarta Pusat", "slug": "jakarta-pusat"},
+        {"nama": "Jakarta Barat", "slug": "jakarta-barat"},
+        {"nama": "Jakarta Utara", "slug": "jakarta-utara"},
+        {"nama": "Jakarta Timur", "slug": "jakarta-timur"},
+        {"nama": "Tangerang Selatan", "slug": "tangerang-selatan"},
+        {"nama": "Tangerang", "slug": "tangerang"},
+        {"nama": "Bekasi", "slug": "bekasi"},
+        {"nama": "Depok", "slug": "depok"},
+        {"nama": "Bogor", "slug": "bogor"},
+        {"nama": "Bandung", "slug": "bandung"},
+        {"nama": "Semarang", "slug": "semarang"},
+        {"nama": "Surabaya", "slug": "surabaya"},
+        {"nama": "Malang", "slug": "malang"},
+        {"nama": "Bali", "slug": "bali"},
+        {"nama": "Medan", "slug": "medan"},
+        {"nama": "Palembang", "slug": "palembang"},
+        {"nama": "Balikpapan", "slug": "balikpapan"},
+        {"nama": "Makassar", "slug": "makassar"}
     ],
-    "max_pages_per_city": 1,
-    "cluster_max_pages": 1
+    "max_pages_per_city": 5,
+    "cluster_max_pages": 50
 }
