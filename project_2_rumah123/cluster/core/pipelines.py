@@ -45,7 +45,7 @@ class SupabaseWarehousePipeline:
             "judul": item["judul"][:255],
             "url_asli": item["url_asli"],
             "harga_total": price_clean,
-            # AI dipindahkan ke trigger fungsi database atau background job Supabase
+            "kota": item.get("lokasi", "")[:100], # Ambil data lokasi dari spider
             "klasifikasi": "CLUSTER_RAW_DATA", 
         }
         
