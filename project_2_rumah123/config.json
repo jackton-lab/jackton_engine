@@ -1,11 +1,7 @@
 {
-  "cities": [
-    {"nama": "Jakarta Selatan", "slug": "jakarta-selatan"},
-    {"nama": "Jakarta Barat", "slug": "jakarta-barat"},
-    {"nama": "Jakarta Pusat", "slug": "jakarta-pusat"},
-    {"nama": "Tangerang Selatan", "slug": "tangerang-selatan"},
-    {"nama": "Depok", "slug": "depok"},
-    {"nama": "Bekasi", "slug": "bekasi"}
-  ],
-  "max_pages_per_city": 3
+    "cities": [
+        {"nama": "Bekasi", "slug": "bekasi"}
+    ],
+    "max_pages_per_city": 1,
+    "cluster_max_pages": 1
 }
