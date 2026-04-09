@@ -16,8 +16,12 @@ def queue_massive_urls():
     # Di Docker, script_dir adalah /app/core, maka parent-nya adalah /app
     config_path = script_dir.parent / 'config.json'
     
+    print(f"[*] Mengecek config.json di: {config_path.absolute()}")
+    
     if not config_path.exists():
         print(f"[!] ERROR: config.json tidak ditemukan di {config_path}")
+        # Coba cek di current dir kalau fail
+        print(f"[*] List isi folder /app: {os.listdir(str(script_dir.parent))}")
         return
 
     with open(config_path, 'r') as f:

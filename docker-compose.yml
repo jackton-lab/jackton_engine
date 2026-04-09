@@ -1,34 +1,30 @@
 version: '3.8'
 
 services:
-  # MESSAGE BROKER (Sistem Otak Pusat)
   redis:
     image: redis:alpine
     ports:
       - "6379:6379"
     restart: always
-    volumes:
-      - redis_data:/data
-    command: redis-server --appendonly yes
 
-  # MASTER ORCHESTRATOR (Mengantrekan Jutaan URL ke Redis)
   master:
     build: ./project_2_rumah123/cluster
     depends_on:
       - redis
-    env_file:
-      - .env
-    command: /app/wait-for-it.sh redis python /app/core/master_orchestrator.py
+    environment:
+      - REDIS_HOST=redis
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_KEY=${SUPABASE_KEY}
+    command: python /app/core/master_orchestrator.py
 
-  # WORKER NODES (Pasukan Eksekutor - Bisa Di-Scale via Docker Swarm/K8s)
   worker:
     build: ./project_2_rumah123/cluster
     depends_on:
       - redis
-    env_file:
-      - .env
-    # Jalankan Spider menggunakan perintah crawl agar settings.py terbaca sempurna
-    command: /app/wait-for-it.sh redis scrapy crawl rumah123_spider
-
-volumes:
-  redis_data:
+    environment:
+      - REDIS_HOST=redis
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_KEY=${SUPABASE_KEY}
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    command: scrapy crawl rumah123_spider

@@ -10,35 +10,36 @@ on:
 jobs:
   run-cluster:
     runs-on: ubuntu-latest
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      REDIS_HOST: redis
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Create .env file from Secrets
-        run: |
-          echo "SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> .env
-          echo "SUPABASE_KEY=${{ secrets.SUPABASE_KEY }}" >> .env
-          echo "GROQ_API_KEY=${{ secrets.GROQ_API_KEY }}" >> .env
-          echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> .env
-          echo "REDIS_HOST=redis" >> .env
-          # Tambahkan API key lain jika diperlukan oleh cluster Anda
-
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Install Docker Compose
-        run: sudo apt-get update && sudo apt-get install -y docker-compose
+      - name: 1. Start Redis
+        run: docker compose up -d redis
 
-      - name: Build and Run Cluster
+      - name: 2. Run Master Orchestrator (Inject URLs)
         run: |
-          docker compose version
-          # Jalankan cluster dengan 2 worker secara eksplisit
-          docker compose up --build --scale worker=2 --abort-on-container-exit --exit-code-from worker
+          # Jalankan Master sampai dia sukses keluar sendiri (exit 0)
+          docker compose run master
           
+      - name: 3. Run Worker Nodes (Scrape & Upload)
+        run: |
+          # Jalankan 2 worker. Berhenti jika idle sesuai settings.py
+          docker compose up --scale worker=2 --abort-on-container-exit --exit-code-from worker worker
+
       - name: Show Logs on Failure
         if: failure()
         run: docker compose logs
 
       - name: Shutdown Cluster
         if: always()
-        run: docker-compose down
+        run: docker compose down
