@@ -5,15 +5,9 @@ from datetime import datetime
 from pathlib import Path
 
 class JsonArchivePipeline:
-    """
-    Pipeline Akhir: Tidak kirim ke DB, tapi kumpulkan data 
-    dan simpan ke brankas_data/mentah/properti_mentah.json 
-    agar bisa diolah oleh 2_ai.py selanjutnya.
-    """
-    
     def __init__(self):
         self.items = []
-        # Gunakan path absolut agar aman di Docker
+        self.seen_ids = set() # Sistem Keamanan Anti-Dobel
         self.output_dir = Path("/app/brankas_data/mentah")
         self.output_file = self.output_dir / "properti_mentah.json"
 
@@ -30,29 +24,63 @@ class JsonArchivePipeline:
             return int(val)
         return 0
 
-    def parse_specs(self, text):
-        lt = lb = kt = km = 0
+    def parse_area(self, text):
+        lt = lb = 0
         text = text.lower()
-        m_lt = re.search(r"(\d+)\s*m²\s*lt|lt\s*:?\s*(\d+)", text)
-        m_lb = re.search(r"(\d+)\s*m²\s*lb|lb\s*:?\s*(\d+)", text)
-        m_kt = re.search(r"(\d+)\s*(?:kt|kamar tidur|bed)", text)
-        m_km = re.search(r"(\d+)\s*(?:km|kamar mandi|bath)", text)
+        # Mencari pola: 120 m² (LT) atau LT: 120
+        # Kadang LT dan LB ada di satu teks panjang
+        m_lt = re.search(r"(\d+)\s*m²\s*(?:lt|luas tanah)|lt\s*:?\s*(\d+)", text)
+        m_lb = re.search(r"(\d+)\s*m²\s*(?:lb|luas bangunan)|lb\s*:?\s*(\d+)", text)
+        
         if m_lt: lt = int(m_lt.group(1) or m_lt.group(2))
         if m_lb: lb = int(m_lb.group(1) or m_lb.group(2))
-        if m_kt: kt = int(m_kt.group(1))
-        if m_km: km = int(m_km.group(1))
-        return lt, lb, kt, km
+        
+        # Jika belum dapat, cari pola m² pertama dan kedua
+        if lt == 0 or lb == 0:
+            all_m2 = re.findall(r"(\d+)\s*m²", text)
+            if len(all_m2) >= 2:
+                lt = int(all_m2[0])
+                lb = int(all_m2[1])
+            elif len(all_m2) == 1:
+                lt = lb = int(all_m2[0])
+                
+        return lt, lb
+
+    def clean_title(self, text):
+        # Anti-Clickbait: Hapus simbol berlebihan (!!!!, ****, $$$$)
+        text = re.sub(r'[!@#$%^&*()_+={}\[\]|\\:;"\'<>,.?/~`]', ' ', text)
+        # Hapus kata-kata marketing sampah (HANYA MINGGU INI, TURUN HARGA, BU!!)
+        marketing_garbage = ["bu!!", "turun harga", "hanya minggu ini", "promo", "hot", "murah", "butuh uang"]
+        for word in marketing_garbage:
+            text = re.sub(word, "", text, flags=re.IGNORECASE)
+        return re.sub(r'\s+', ' ', text).strip()[:100]
 
     def process_item(self, item, spider):
-        price_val = self.parse_price(item.get("harga_raw", ""))
-        lt, lb, kt, km = self.parse_specs(item.get("spec_raw", ""))
+        # 1. Cek Duplikasi ID
+        if item["id"] in self.seen_ids:
+            return item
         
-        # Hitung harga_m2 (Kunci Penting untuk Audit AI di 2_ai.py)
+        # 2. Parsing Harga
+        price_val = self.parse_price(item.get("harga_raw", ""))
+        if price_val == 0: return item
+        
+        # 3. Parsing Luas (LT/LB)
+        lt, lb = self.parse_area(item.get("spec_text", ""))
+        if lt == 0: return item # Penting: Tanpa LT, AI tidak bisa hitung harga/m2
+        
+        # 4. Parsing Kamar (KT/KM)
+        try:
+            kt = int(re.search(r"(\d+)", item.get("kt_raw", "0")).group(1))
+            km = int(re.search(r"(\d+)", item.get("km_raw", "0")).group(1))
+        except:
+            kt = km = 0
+        
+        # 5. Hitung harga_m2 (Makanan Pokok AI)
         harga_m2 = int(price_val / lt) if lt > 0 else 0
         
         entry = {
             "id": item["id"],
-            "judul": item["judul"][:100],
+            "judul": self.clean_title(item["judul"]),
             "harga": str(price_val),
             "lokasi": item["lokasi"],
             "lt": lt,
@@ -65,14 +93,14 @@ class JsonArchivePipeline:
         }
         
         self.items.append(entry)
+        self.seen_ids.add(item["id"])
         return item
 
     def close_spider(self, spider):
-        """Simpan ke file saat semua worker selesai"""
         if not self.output_dir.exists():
             self.output_dir.mkdir(parents=True, exist_ok=True)
             
         with open(self.output_file, 'w') as f:
             json.dump(self.items, f, indent=4)
         
-        spider.logger.info(f"[*] ARSIP SELESAI: {len(self.items)} data mentah disimpan di {self.output_file}")
+        spider.logger.info(f"[*] ARSIP SELESAI: {len(self.items)} data BERKUALITAS disimpan di {self.output_file}")

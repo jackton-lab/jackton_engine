@@ -58,18 +58,30 @@ class Rumah123ClusterSpider(RedisSpider):
                     location_el = await card.query_selector(".ui-molecule-property-card__location, .ui-atomic-text")
                     location = await location_el.inner_text() if location_el else ""
 
-                    # Tambahan: Ambil Spesifikasi
-                    spec_el = await card.query_selector(".ui-molecule-property-card__facilities-list, .ui-organism-property-card__facilities")
-                    spec_text = await spec_el.inner_text() if spec_el else ""
+                    # Tambahan: Ambil Spesifikasi Detail (KT, KM, LT, LB)
+                    # Kita cari berdasarkan teks m² dan icon
+                    spec_container = await card.query_selector(".ui-molecule-property-card__facilities-list, .ui-organism-property-card__facilities")
+                    spec_text = await spec_container.inner_text() if spec_container else ""
                     
-                    # Lempar data mentah ke Pipeline untuk diparsing angkanya (LT, LB, dll)
+                    # Mencari KT/KM via icon (Sesuai logika 1_tarik.py)
+                    kt_el = await card.query_selector("use[*|href*='bedroom-icon']")
+                    km_el = await card.query_selector("use[*|href*='bathroom-icon']")
+                    
+                    kt_val = await kt_el.evaluate("el => el.closest('span').innerText") if kt_el else "0"
+                    km_val = await km_el.evaluate("el => el.closest('span').innerText") if km_el else "0"
+
+                    if not raw_url: continue
+
+                    # Lempar data yang lebih kaya ke Pipeline
                     yield {
                         "id": prop_id,
                         "judul": title.strip(),
                         "url_properti": url_prop,
                         "harga_raw": price_raw.strip(),
                         "lokasi": location.strip(),
-                        "spec_raw": spec_text.strip()
+                        "spec_text": spec_text.strip(),
+                        "kt_raw": kt_val,
+                        "km_raw": km_val
                     }
                 except Exception as e:
                     self.logger.error(f"Error parsing card: {e}")
