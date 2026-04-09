@@ -31,9 +31,13 @@ jobs:
 
       - name: Build and Run Cluster
         run: |
-          # Jalankan Cluster. Gunakan --abort-on-container-exit agar workflow 
-          # otomatis selesai begitu Worker (kontainer pertama yang exit) berhenti.
-          docker-compose up --build --abort-on-container-exit --exit-code-from worker
+          docker compose version
+          # Jalankan cluster dengan 2 worker secara eksplisit
+          docker compose up --build --scale worker=2 --abort-on-container-exit --exit-code-from worker
+          
+      - name: Show Logs on Failure
+        if: failure()
+        run: docker compose logs
 
       - name: Shutdown Cluster
         if: always()

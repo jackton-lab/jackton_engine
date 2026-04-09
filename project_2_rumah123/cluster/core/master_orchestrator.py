@@ -25,8 +25,23 @@ def queue_massive_urls():
         cities = [c['slug'] for c in config.get("cities", [])]
         max_pages = config.get("cluster_max_pages", 100)
 
-    r = redis.Redis(host=os.getenv('REDIS_HOST', 'redis'), port=6379, db=0)
+    # Retry mechanism untuk koneksi Redis
+    import time
+    r = None
+    for i in range(10):
+        try:
+            r = redis.Redis(host=os.getenv('REDIS_HOST', 'redis'), port=6379, db=0)
+            r.ping()
+            print(f"[*] Terhubung ke Redis pada percobaan ke-{i+1}")
+            break
+        except:
+            print(f"[!] Redis belum siap, mencoba lagi dalam 2 detik... ({i+1}/10)")
+            time.sleep(2)
     
+    if not r:
+        print("[!] GAGAL: Tidak bisa terhubung ke Redis.")
+        return
+
     print(f"[*] MASTER ORCHESTRATOR: Menginjeksi {len(cities)} Kota ke Redis...")
     
     for city in cities:

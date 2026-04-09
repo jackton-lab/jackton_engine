@@ -29,9 +29,6 @@ services:
       - .env
     # Jalankan Spider menggunakan perintah crawl agar settings.py terbaca sempurna
     command: /app/wait-for-it.sh redis scrapy crawl rumah123_spider
-    deploy:
-      mode: replicated
-      replicas: 2 # Dikurangi dari 5 menjadi 2 agar tidak melebihi limit memori GitHub Actions (7GB RAM)
 
 volumes:
   redis_data:
