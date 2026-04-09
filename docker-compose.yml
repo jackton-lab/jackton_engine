@@ -18,7 +18,7 @@ services:
       - redis
     env_file:
       - .env
-    command: python /app/core/master_orchestrator.py
+    command: /app/wait-for-it.sh redis python /app/core/master_orchestrator.py
 
   # WORKER NODES (Pasukan Eksekutor - Bisa Di-Scale via Docker Swarm/K8s)
   worker:
@@ -28,10 +28,10 @@ services:
     env_file:
       - .env
     # Jalankan Spider menggunakan perintah crawl agar settings.py terbaca sempurna
-    command: scrapy crawl rumah123_spider
+    command: /app/wait-for-it.sh redis scrapy crawl rumah123_spider
     deploy:
       mode: replicated
-      replicas: 5 # Default: Pasukan 5 Mesin Serentak
+      replicas: 2 # Dikurangi dari 5 menjadi 2 agar tidak melebihi limit memori GitHub Actions (7GB RAM)
 
 volumes:
   redis_data:
