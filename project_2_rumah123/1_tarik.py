@@ -33,7 +33,6 @@ def extract_specs_v61(card_soup):
     kt_el = card_soup.find("use", attrs={"xlink:href": re.compile(r"bedroom-icon")})
     if kt_el:
         try:
-            # Mencari teks angka di dalam span yang membungkus icon
             parent_span = kt_el.find_parent("span")
             if parent_span:
                 kt_t = parent_span.get_text(strip=True)
@@ -53,40 +52,25 @@ def extract_specs_v61(card_soup):
     return lt, lb, kt, km
 
 def extract_from_next_data_v80(soup):
-    """
-    LOGIKA DEWA: Mengambil data langsung dari payload JSON internal Next.js.
-    Tidak peduli CSS selector berubah, selama data ada di server, kita dapat.
-    """
     script_tag = soup.find("script", id="__NEXT_DATA__")
     if not script_tag: return []
-    
     try:
         data = json.loads(script_tag.string)
-        # Navigasi ke dalam struktur JSON Rumah123 (Search Results)
-        # Struktur biasanya: props -> pageProps -> initialValue -> search -> res
         listings = data.get("props", {}).get("pageProps", {}).get("initialValue", {}).get("search", {}).get("res", [])
-        
         results = []
         for item in listings:
             try:
-                # Ambil data murni tanpa BeautifulSoup
                 prop_id = item.get("id")
                 title = item.get("title")
                 price_val = item.get("prices", [{}])[0].get("value", 0)
-                
-                # Spesifikasi
                 lt = item.get("attributes", {}).get("landSize", 0)
                 lb = item.get("attributes", {}).get("builtUpSize", 0)
                 kt = item.get("attributes", {}).get("bedroom", 0)
                 km = item.get("attributes", {}).get("bathroom", 0)
-                
-                # Lokasi
                 lokasi = item.get("location", {}).get("city", {}).get("name", "N/A")
                 district = item.get("location", {}).get("district", {}).get("name", "")
                 lokasi_full = f"{district}, {lokasi}" if district else lokasi
-
                 if price_val == 0 or lt == 0: continue
-
                 results.append({
                     "id": prop_id, "judul": title,
                     "harga": str(int(price_val)), "lokasi": lokasi_full,
@@ -100,25 +84,77 @@ def extract_from_next_data_v80(soup):
     except: return []
 
 def scrape_rumah123_v61():
-    # ... (rest of setup)
+    script_dir = Path(__file__).resolve().parent
+    output_path = script_dir / 'brankas_data' / 'mentah' / 'properti_mentah.json'
+    config_path = script_dir / 'config.json'
+    
+    with open(config_path, 'r') as f:
+        config = json.load(f)
+        cities = config.get("cities", [])
+        max_pages = config.get("max_pages_per_city", 1)
+
+    print(f"[*] PRECISION-ENGINE V61: JSON Surgeon + Card Fallback Aktif...")
+    total_results = []
+    seen_ids = set()
     driver = Driver(uc=True, headless=True)
+
     try:
         for city in cities:
-            # ... (page loop)
-            driver.uc_open_with_reconnect(page_url, 6)
-            soup = BeautifulSoup(driver.page_source, 'html.parser')
+            city_name = city["nama"]
+            url_base = f"https://www.rumah123.com/jual/{city['slug']}/rumah/?sort=posted-desc"
             
-            # GUNAKAN METODE PEMBEDAH JSON
-            listings = extract_from_next_data_v80(soup)
-            
-            if not listings:
-                # FALLBACK: Jika JSON gagal, gunakan metode kartu (Gotong Royong)
-                print("    [!] JSON Method failed, falling back to Card Parsing...")
-                # ... (logika ldp-listing-card yang lama)
-            else:
-                total_results.extend(listings)
-                print(f"    [OK] Berhasil menarik {len(listings)} data via JSON Surgeon.")
+            for page_num in range(1, max_pages + 1):
+                page_url = f"{url_base}&page={page_num}"
+                print(f"\n>>> {city_name} | HAL {page_num}")
+                driver.uc_open_with_reconnect(page_url, 6)
+                time.sleep(6)
+                
+                soup = BeautifulSoup(driver.page_source, 'html.parser')
+                listings = extract_from_next_data_v80(soup)
+                
+                if listings:
+                    added = 0
+                    for item in listings:
+                        if item['id'] not in seen_ids:
+                            total_results.append(item)
+                            seen_ids.add(item['id'])
+                            added += 1
+                    print(f"    [OK] Berhasil menarik {added} data via JSON Surgeon.")
+                else:
+                    print("    [!] JSON Method failed, falling back to Card Parsing...")
+                    cards = soup.find_all("div", attrs={"data-name": "ldp-listing-card"})
+                    added = 0
+                    for card in cards:
+                        try:
+                            link_el = card.find("a", href=re.compile(r"hos\d+"))
+                            if not link_el: continue
+                            url_prop = f"https://www.rumah123.com{link_el['href']}" if link_el['href'].startswith("/") else link_el['href']
+                            id_match = re.search(r"-(hos\d+)/?$", url_prop)
+                            prop_id = id_match.group(1) if id_match else url_prop
+                            if prop_id in seen_ids: continue
+                            price_val = parse_price_smart(card.find("span", attrs={"data-testid": "ldp-text-price"}).get_text(strip=True))
+                            if price_val == 0: continue
+                            lt, lb, kt, km = extract_specs_v61(card)
+                            loc_el = card.find("p", class_=re.compile(r"text-greyText"))
+                            lokasi = loc_el.get_text(strip=True) if loc_el else city_name
+                            harga_m2 = int(price_val / lt) if lt > 0 else 0
+                            entry = {
+                                "id": prop_id, "judul": card.find("h2").get_text(strip=True),
+                                "harga": str(price_val), "lokasi": lokasi,
+                                "lt": lt, "lb": lb, "kt": kt, "km": km,
+                                "harga_m2": harga_m2,
+                                "url_properti": url_prop,
+                                "waktu_tarik": datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                            }
+                            total_results.append(entry)
+                            seen_ids.add(prop_id)
+                            added += 1
+                        except: continue
+                    print(f"    [OK] Berhasil menarik {added} data via Card Parsing.")
+                
+                with open(output_path, 'w') as f: json.dump(total_results, f, indent=4)
     finally:
         driver.quit()
+
 if __name__ == "__main__":
     scrape_rumah123_v61()
