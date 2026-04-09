@@ -27,8 +27,8 @@ services:
       - redis
     env_file:
       - .env
-    # Jalankan Spider yang terus-menerus mendengarkan perintah Redis
-    command: scrapy runspider /app/core/spiders/rumah123_spider.py
+    # Jalankan Spider menggunakan perintah crawl agar settings.py terbaca sempurna
+    command: scrapy crawl rumah123_spider
     deploy:
       mode: replicated
       replicas: 5 # Default: Pasukan 5 Mesin Serentak
