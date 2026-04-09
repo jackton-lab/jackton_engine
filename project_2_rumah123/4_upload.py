@@ -14,15 +14,27 @@ def upload_to_supabase():
     script_dir = Path(__file__).resolve().parent
     input_path = script_dir / 'brankas_data' / 'bersih' / 'properti_analisis.json'
     
-    if not url or not key or not input_path.exists():
-        print("[!] Konfigurasi atau data analisis tidak ditemukan.")
+    if not url or not key:
+        print("[!] SUPABASE_URL atau SUPABASE_KEY tidak ditemukan di env.")
+        return
+
+    if not input_path.exists():
+        print(f"[!] Data analisis tidak ditemukan di {input_path}. Skip upload.")
         return
 
     supabase: Client = create_client(url, key)
-    with open(input_path, 'r') as f:
-        data = json.load(f)
+    try:
+        with open(input_path, 'r') as f:
+            data = json.load(f)
+    except Exception as e:
+        print(f"[!] Gagal membaca file JSON: {e}")
+        return
 
-    print(f"[*] Menyiapkan sinkronisasi {len(data)} data bersih ke Supabase...")
+    if not data:
+        print("[!] File JSON kosong. Tidak ada yang perlu diunggah.")
+        return
+
+    print(f"[*] Menyiapkan sinkronisasi {len(data)} data ke Supabase...")
 
     payloads = []
     for item in data:

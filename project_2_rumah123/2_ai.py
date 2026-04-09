@@ -117,23 +117,29 @@ async def run_ai_analysis():
     
     for i in range(0, len(raw_data), 10):
         batch = raw_data[i:i+10]
-        results = await analyze_batch_v62(batch, client)
-        if results:
-            results_dict = {res['id']: res for res in results if isinstance(res, dict) and 'id' in res}
-            for item in batch:
-                res_ai = results_dict.get(item['id'])
-                if res_ai:
-                    item.update({
-                        "skor_investasi": res_ai.get('skor_investasi', 0),
-                        "klasifikasi": res_ai.get('klasifikasi', 'REGULAR'),
-                        "harga_per_m2": item.get('harga_m2', 0),
-                        "analisis_ai": res_ai.get('analisis_audit', "")
-                    })
-                    analyzed_data.append(item)
+        print(f"    [>] Auditing batch {i//10 + 1}...", end="\r")
+        try:
+            results = await analyze_batch_v62(batch, client)
+            if results:
+                results_dict = {res['id']: res for res in results if isinstance(res, dict) and 'id' in res}
+                for item in batch:
+                    res_ai = results_dict.get(item['id'])
+                    if res_ai:
+                        item.update({
+                            "skor_investasi": res_ai.get('skor_investasi', 0),
+                            "klasifikasi": res_ai.get('klasifikasi', 'REGULAR'),
+                            "harga_per_m2": item.get('harga_m2', 0),
+                            "analisis_ai": res_ai.get('analisis_audit', "")
+                        })
+                        analyzed_data.append(item)
+            # Simpan progres setiap batch agar jika mati di tengah, data tidak hilang
+            with open(output_path, 'w') as f: json.dump(analyzed_data, f, indent=4)
+        except Exception as e:
+            print(f"\n[!] Error di batch {i}: {e}")
+            continue # Lanjut ke batch berikutnya
         await asyncio.sleep(1)
 
-    with open(output_path, 'w') as f: json.dump(analyzed_data, f, indent=4)
-    print(f"\n[SUCCESS] AUDIT NASIONAL SELESAI!")
+    print(f"\n[SUCCESS] AUDIT NASIONAL SELESAI! {len(analyzed_data)} data dianalisis.")
 
 if __name__ == "__main__":
     asyncio.run(run_ai_analysis())

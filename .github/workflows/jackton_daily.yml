@@ -36,26 +36,28 @@ jobs:
           # Ambil file mentah dari kontainer ke workspace GitHub
           CONTAINER_ID=$(docker ps -a --filter "label=com.docker.compose.service=worker" --format "{{.ID}}" | head -n 1)
           docker cp $CONTAINER_ID:/app/brankas_data/mentah/properti_mentah.json project_2_rumah123/brankas_data/mentah/
+          
+          # VALIDASI: Cek apakah file ada dan tidak kosong
+          if [ ! -s project_2_rumah123/brankas_data/mentah/properti_mentah.json ]; then
+            echo "::error::File properti_mentah.json kosong atau tidak ditemukan! Scraping gagal."
+            exit 1
+          fi
 
       - name: 3. Run AI Analysis (Proses Neural Engine V62)
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: |
-          # Install dependencies on host
           pip install groq python-dotenv
-          
-          # Jalankan audit AI di host menggunakan data yang sudah ditarik
-          python3 project_2_rumah123/2_ai.py
+          # Jalankan AI dengan logging yang lebih baik
+          python3 project_2_rumah123/2_ai.py || echo "AI Analysis partially failed, continuing to upload what we have..."
 
       - name: 4. Run Supabase Upload (Sinkronisasi V60)
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
         run: |
-          # Install dependencies on host
           pip install supabase
-          
-          # Jalankan sinkronisasi di host
+          # Jalankan upload
           python3 project_2_rumah123/4_upload.py
 
       - name: 5. Archive Data to GitHub
