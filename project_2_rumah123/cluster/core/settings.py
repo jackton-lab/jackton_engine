@@ -63,7 +63,7 @@ PLAYWRIGHT_CONTEXT_ARGS = {
 # 5. DATA WAREHOUSING (LOCAL ARCHIVE)
 # ==========================================
 ITEM_PIPELINES = {
-    'core.pipelines.JsonArchivePipeline': 300,
+    'core.pipelines.RedisResultsPipeline': 300,
 }
 
 REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"

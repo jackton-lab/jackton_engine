@@ -19,45 +19,48 @@ jobs:
           mkdir -p project_2_rumah123/brankas_data/mentah
           mkdir -p project_2_rumah123/brankas_data/bersih
 
-      - name: 1. Build & Run Scrapy (Tarik Mentah)
+      - name: 1. Build & Run Scrapy (Tarik Mentah Massal)
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
         run: |
           docker compose up -d redis
-          # Menjalankan Worker untuk scraping dan simpan ke file
+          # Worker menarik data ke Redis secara paralel
           docker compose up --build --scale worker=2 --abort-on-container-exit --exit-code-from worker worker
+
+      - name: 2. Collect Results to JSON (Final Collector)
+        run: |
+          # Ambil semua data dari Redis dan simpan ke file properti_mentah.json
+          docker compose run --workdir /app worker python3 core/final_collector.py
           
           # Ambil file mentah dari kontainer ke workspace GitHub
-          # Kita gunakan 'docker cp' karena volume di CI sering bermasalah permission
-          # Kita ambil dari salah satu kontainer worker yang baru saja exit
-          CONTAINER_ID=$(docker ps -a --filter "ancestor=jackton_engine-worker" --format "{{.ID}}" | head -n 1)
+          CONTAINER_ID=$(docker ps -a --filter "label=com.docker.compose.service=worker" --format "{{.ID}}" | head -n 1)
           docker cp $CONTAINER_ID:/app/brankas_data/mentah/properti_mentah.json project_2_rumah123/brankas_data/mentah/
 
-      - name: 2. Run AI Analysis (Proses Neural Engine)
+      - name: 3. Run AI Analysis (Proses Neural Engine V62)
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: |
-          # Gunakan image yang sama untuk menjalankan skrip AI
+          # Gunakan skrip asli Bapak untuk audit AI mendalam
           docker compose run --workdir /app/.. worker python3 project_2_rumah123/2_ai.py
           
           # Ambil hasil bersih dari kontainer
           CONTAINER_ID=$(docker ps -a --filter "label=com.docker.compose.service=worker" --format "{{.ID}}" | head -n 1)
           docker cp $CONTAINER_ID:/app/project_2_rumah123/brankas_data/bersih/properti_analisis.json project_2_rumah123/brankas_data/bersih/
 
-      - name: 3. Run Supabase Upload (Sinkronisasi V60)
+      - name: 4. Run Supabase Upload (Sinkronisasi V60)
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
         run: |
           docker compose run --workdir /app/.. worker python3 project_2_rumah123/4_upload.py
 
-      - name: 4. Archive Data to GitHub
+      - name: 5. Archive Data to GitHub
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add project_2_rumah123/brankas_data/
-          git commit -m "Auto-archive: Property Data $(date)" || echo "No changes"
+          git commit -m "Auto-archive: Detailed Property Data $(date)" || echo "No changes"
           git push
 
       - name: Cleanup
