@@ -5,11 +5,6 @@ import redis
 from datetime import datetime
 
 class RedisResultsPipeline:
-    """
-    Pipeline ini mengumpulkan hasil dari banyak Worker ke satu 
-    list di Redis agar tidak terjadi tabrakan file (overwriting).
-    """
-    
     def __init__(self):
         self.r = redis.Redis(host=os.getenv('REDIS_HOST', 'redis'), port=6379, db=0)
 
@@ -29,49 +24,51 @@ class RedisResultsPipeline:
     def parse_area(self, text):
         lt = lb = 0
         text = text.lower()
-        m_lt = re.search(r"(\d+)\s*m²\s*(?:lt|luas tanah)|lt\s*:?\s*(\d+)", text)
-        m_lb = re.search(r"(\d+)\s*m²\s*(?:lb|luas bangunan)|lb\s*:?\s*(\d+)", text)
-        if m_lt: lt = int(m_lt.group(1) or m_lt.group(2))
-        if m_lb: lb = int(m_lb.group(1) or m_lb.group(2))
+        # Logika ekstraksi Rumah123 modern: LT biasanya di kiri, LB di kanan atau ada label m2
+        # Contoh: "189 m² / 250 m²"
+        m2_matches = re.findall(r"(\d+)\s*m²", text)
+        if len(m2_matches) >= 2:
+            lt = int(m2_matches[0]) # Angka m2 pertama biasanya LT
+            lb = int(m2_matches[1]) # Angka m2 kedua biasanya LB
+        elif len(m2_matches) == 1:
+            lt = lb = int(m2_matches[0])
+            
+        # Jika ada label eksplisit, timpa datanya
+        m_lt = re.search(r"lt\s*:?\s*(\d+)", text)
+        m_lb = re.search(r"lb\s*:?\s*(\d+)", text)
+        if m_lt: lt = int(m_lt.group(1))
+        if m_lb: lb = int(m_lb.group(1))
         
-        # Fallback jika format teks berbeda
-        if lt == 0 or lb == 0:
-            all_m2 = re.findall(r"(\d+)\s*m²", text)
-            if len(all_m2) >= 2:
-                lt = int(all_m2[0]); lb = int(all_m2[1])
-            elif len(all_m2) == 1:
-                lt = lb = int(all_m2[0])
         return lt, lb
 
     def process_item(self, item, spider):
         price_val = self.parse_price(item.get("harga_raw", ""))
         lt, lb = self.parse_area(item.get("spec_text", ""))
         
-        # Ekstraksi KT/KM dari teks mentah jika icon gagal
+        # Ekstraksi KT/KM (Kamar Tidur / Kamar Mandi)
         try:
             kt = int(re.search(r"(\d+)", item.get("kt_raw", "0")).group(1))
             km = int(re.search(r"(\d+)", item.get("km_raw", "0")).group(1))
         except:
             kt = km = 0
             
-        # Perhitungan harga_m2 (Esensial untuk AI Audit)
+        # Hitung harga_m2 sesuai contoh Bapak (Integer)
         harga_m2 = int(price_val / lt) if lt > 0 else 0
         
-        # Format Identik dengan 1_tarik.py (Original Logic)
+        # STRUKTUR IDENTIK DENGAN CONTOH BAPAK
         entry = {
-            "id": item["id"],
-            "judul": item["judul"][:100],
-            "harga": str(price_val),
-            "lokasi": item["lokasi"],
-            "lt": lt,
-            "lb": lb,
-            "kt": kt,
-            "km": km,
-            "harga_m2": harga_m2,
-            "url_properti": item["url_properti"],
-            "waktu_tarik": datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            "id": item["id"],                     # Contoh: "hos40440919"
+            "judul": item["judul"][:255],         # Judul lengkap
+            "harga": str(price_val),             # String angka: "3490000000"
+            "lokasi": item["lokasi"],             # Contoh: "Galaxy, Bekasi"
+            "lt": lt,                             # Integer: 189
+            "lb": lb,                             # Integer: 250
+            "kt": kt,                             # Integer: 5
+            "km": km,                             # Integer: 3
+            "harga_m2": harga_m2,                 # Integer: 18465608
+            "url_properti": item["url_properti"], # URL lengkap
+            "waktu_tarik": datetime.now().strftime('%Y-%m-%d %H:%M:%S') # Format contoh
         }
         
-        # Kirim ke list pusat di Redis
         self.r.rpush("rumah123:results", json.dumps(entry))
         return item
