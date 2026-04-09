@@ -29,20 +29,26 @@ def extract_specs_v61(card_soup):
     if m_lt: lt = int(m_lt.group(1))
     if m_lb: lb = int(m_lb.group(1))
     
+    # Ekstraksi KT/KM dengan logika yang lebih aman
     kt_el = card_soup.find("use", attrs={"xlink:href": re.compile(r"bedroom-icon")})
     if kt_el:
         try:
-            kt_t = kt_el.find_parent("span").get_text(strip=True)
-            m = re.search(r"(\d+)", kt_t)
-            if m: kt = int(m.group(1))
+            # Mencari teks angka di dalam span yang membungkus icon
+            parent_span = kt_el.find_parent("span")
+            if parent_span:
+                kt_t = parent_span.get_text(strip=True)
+                m = re.search(r"(\d+)", kt_t)
+                if m: kt = int(m.group(1))
         except: pass
     
     km_el = card_soup.find("use", attrs={"xlink:href": re.compile(r"bathroom-icon")})
     if km_el:
         try:
-            km_t = km_el.find_parent("span").get_text(strip=True)
-            m = re.search(r"(\d+)", km_t)
-            if m: km = int(m.group(1))
+            parent_span = km_el.find_parent("span")
+            if parent_span:
+                km_t = parent_span.get_text(strip=True)
+                m = re.search(r"(\d+)", km_t)
+                if m: km = int(m.group(1))
         except: pass
     return lt, lb, kt, km
 
