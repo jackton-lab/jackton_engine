@@ -1,5 +1,8 @@
 name: Jackton Daily Docker Cluster
 on:
+  push:
+    branches:
+      - main
   schedule:
     - cron: '0 21 * * *'
   workflow_dispatch:
