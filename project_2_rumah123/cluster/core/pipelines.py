@@ -1,54 +1,21 @@
 import os
-from supabase import create_client, Client
-import re
 import json
-from groq import Groq
+import re
+from datetime import datetime
+from pathlib import Path
 
-class SupabaseWarehousePipeline:
+class JsonArchivePipeline:
+    """
+    Pipeline Akhir: Tidak kirim ke DB, tapi kumpulkan data 
+    dan simpan ke brankas_data/mentah/properti_mentah.json 
+    agar bisa diolah oleh 2_ai.py selanjutnya.
+    """
+    
     def __init__(self):
-        url = os.getenv("SUPABASE_URL")
-        key = os.getenv("SUPABASE_KEY")
-        self.groq_key = os.getenv("GROQ_API_KEY")
-
-        if url and key:
-            self.supabase: Client = create_client(url, key)
-            self.connected = True
-        else:
-            self.connected = False
-
-        if self.groq_key:
-            self.ai_client = Groq(api_key=self.groq_key)
-        else:
-            self.ai_client = None
-
-    def analyze_with_ai(self, item):
-        if not self.ai_client:
-            return "No Analysis", 50
-
-        prompt = f"""
-        Analisa data properti berikut:
-        Judul: {item['judul']}
-        Harga: {item['harga_raw']}
-        Lokasi: {item.get('lokasi', 'Unknown')}
-        Spek: {item.get('spec_raw', '')}
-
-        Berikan JSON singkat:
-        {{
-          "clean_title": "Judul profesional tanpa clickbait",
-          "investment_score": 0-100,
-          "summary": "Analisa singkat max 15 kata"
-        }}
-        """
-        try:
-            chat = self.ai_client.chat.completions.create(
-                messages=[{"role": "user", "content": prompt}],
-                model="llama-3.3-70b-versatile",
-                response_format={"type": "json_object"}
-            )
-            res = json.loads(chat.choices[0].message.content)
-            return res.get("summary", "N/A"), res.get("investment_score", 50), res.get("clean_title", item['judul'])
-        except:
-            return "Analysis Failed", 50, item['judul']
+        self.items = []
+        # Gunakan path absolut agar aman di Docker
+        self.output_dir = Path("/app/brankas_data/mentah")
+        self.output_file = self.output_dir / "properti_mentah.json"
 
     def parse_price(self, price_str):
         if not price_str or "Rp" not in price_str: return 0
@@ -77,31 +44,35 @@ class SupabaseWarehousePipeline:
         return lt, lb, kt, km
 
     def process_item(self, item, spider):
-        if not self.connected:
-            return item
-
-        price_clean = self.parse_price(item.get("harga_raw", ""))
-        if price_clean == 0: return item
-
+        price_val = self.parse_price(item.get("harga_raw", ""))
         lt, lb, kt, km = self.parse_specs(item.get("spec_raw", ""))
-
-        # PROSES PEMATANGAN AI
-        summary, score, clean_title = self.analyze_with_ai(item)
-
-        payload = {
-            "judul": clean_title[:255],
-            "url_asli": item["url_asli"],
-            "harga_total": price_clean,
-            "kota": item.get("lokasi", "")[:100],
-            "lt": lt, "lb": lb, "kt": kt, "km": km,
-            "klasifikasi": f"AI_SCORED: {score}",
-            "catatan_ai": summary 
+        
+        # Hitung harga_m2 (Kunci Penting untuk Audit AI di 2_ai.py)
+        harga_m2 = int(price_val / lt) if lt > 0 else 0
+        
+        entry = {
+            "id": item["id"],
+            "judul": item["judul"][:100],
+            "harga": str(price_val),
+            "lokasi": item["lokasi"],
+            "lt": lt,
+            "lb": lb,
+            "kt": kt,
+            "km": km,
+            "harga_m2": harga_m2,
+            "url_properti": item["url_properti"],
+            "waktu_tarik": datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         }
-
-        try:
-            self.supabase.table('investments').upsert(payload, on_conflict='url_asli').execute()
-        except Exception as e:
-            spider.logger.error(f"Supabase Error: {e}")
-
+        
+        self.items.append(entry)
         return item
 
+    def close_spider(self, spider):
+        """Simpan ke file saat semua worker selesai"""
+        if not self.output_dir.exists():
+            self.output_dir.mkdir(parents=True, exist_ok=True)
+            
+        with open(self.output_file, 'w') as f:
+            json.dump(self.items, f, indent=4)
+        
+        spider.logger.info(f"[*] ARSIP SELESAI: {len(self.items)} data mentah disimpan di {self.output_file}")

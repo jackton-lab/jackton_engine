@@ -15,7 +15,10 @@ services:
       - REDIS_HOST=redis
       - SUPABASE_URL=${SUPABASE_URL}
       - SUPABASE_KEY=${SUPABASE_KEY}
-    command: python /app/core/master_orchestrator.py
+    volumes:
+      - ./project_2_rumah123/brankas_data:/app/brankas_data
+    command: /app/wait-for-it.sh redis python /app/core/master_orchestrator.py
+
 
   worker:
     build: ./project_2_rumah123/cluster
@@ -27,4 +30,6 @@ services:
       - SUPABASE_KEY=${SUPABASE_KEY}
       - GROQ_API_KEY=${GROQ_API_KEY}
       - OPENAI_API_KEY=${OPENAI_API_KEY}
-    command: scrapy crawl rumah123_spider
+    volumes:
+      - ./project_2_rumah123/brankas_data:/app/brankas_data
+    command: /app/wait-for-it.sh redis scrapy crawl rumah123_spider

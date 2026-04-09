@@ -1,4 +1,4 @@
-name: Jackton Daily Docker Cluster
+name: Jackton Daily - Full Pipeline (Original Flow)
 on:
   push:
     branches:
@@ -8,38 +8,58 @@ on:
   workflow_dispatch:
 
 jobs:
-  run-cluster:
+  pipeline:
     runs-on: ubuntu-latest
-    env:
-      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-      SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      REDIS_HOST: redis
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: 1. Start Redis
-        run: docker compose up -d redis
-
-      - name: 2. Run Master Orchestrator (Inject URLs)
+      - name: Create necessary directories
         run: |
-          # Jalankan Master sampai dia sukses keluar sendiri (exit 0)
-          docker compose run master
+          mkdir -p project_2_rumah123/brankas_data/mentah
+          mkdir -p project_2_rumah123/brankas_data/bersih
+
+      - name: 1. Build & Run Scrapy (Tarik Mentah)
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: |
+          docker compose up -d redis
+          # Menjalankan Worker untuk scraping dan simpan ke file
+          docker compose up --build --scale worker=2 --abort-on-container-exit --exit-code-from worker worker
           
-      - name: 3. Run Worker Nodes (Scrape & Upload)
+          # Ambil file mentah dari kontainer ke workspace GitHub
+          # Kita gunakan 'docker cp' karena volume di CI sering bermasalah permission
+          # Kita ambil dari salah satu kontainer worker yang baru saja exit
+          CONTAINER_ID=$(docker ps -a --filter "ancestor=jackton_engine-worker" --format "{{.ID}}" | head -n 1)
+          docker cp $CONTAINER_ID:/app/brankas_data/mentah/properti_mentah.json project_2_rumah123/brankas_data/mentah/
+
+      - name: 2. Run AI Analysis (Proses Neural Engine)
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: |
-          # Jalankan 2 worker. Berhenti jika idle sesuai settings.py
-          docker compose up --scale worker=2 --abort-on-container-exit --exit-code-from worker worker
+          # Gunakan image yang sama untuk menjalankan skrip AI
+          docker compose run --workdir /app/.. worker python3 project_2_rumah123/2_ai.py
+          
+          # Ambil hasil bersih dari kontainer
+          CONTAINER_ID=$(docker ps -a --filter "label=com.docker.compose.service=worker" --format "{{.ID}}" | head -n 1)
+          docker cp $CONTAINER_ID:/app/project_2_rumah123/brankas_data/bersih/properti_analisis.json project_2_rumah123/brankas_data/bersih/
 
-      - name: Show Logs on Failure
-        if: failure()
-        run: docker compose logs
+      - name: 3. Run Supabase Upload (Sinkronisasi V60)
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: |
+          docker compose run --workdir /app/.. worker python3 project_2_rumah123/4_upload.py
 
-      - name: Shutdown Cluster
+      - name: 4. Archive Data to GitHub
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add project_2_rumah123/brankas_data/
+          git commit -m "Auto-archive: Property Data $(date)" || echo "No changes"
+          git push
+
+      - name: Cleanup
         if: always()
         run: docker compose down

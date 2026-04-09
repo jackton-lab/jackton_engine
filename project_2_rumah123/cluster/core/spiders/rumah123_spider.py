@@ -48,25 +48,28 @@ class Rumah123ClusterSpider(RedisSpider):
                     
                     link_el = await card.query_selector("a")
                     raw_url = await link_el.get_attribute("href") if link_el else ""
+                    if not raw_url: continue
                     
+                    url_prop = f"https://www.rumah123.com{raw_url}" if raw_url.startswith("/") else raw_url
+                    id_match = re.search(r"-(hos\d+)/?$", url_prop)
+                    prop_id = id_match.group(1) if id_match else url_prop
+
                     # Tambahan: Ambil Lokasi/Kota
                     location_el = await card.query_selector(".ui-molecule-property-card__location, .ui-atomic-text")
                     location = await location_el.inner_text() if location_el else ""
 
-                    # Tambahan: Ambil Spesifikasi (LT, LB, KT, KM)
-                    # Kita ambil seluruh teks di dalam card untuk diproses di pipeline
+                    # Tambahan: Ambil Spesifikasi
                     spec_el = await card.query_selector(".ui-molecule-property-card__facilities-list, .ui-organism-property-card__facilities")
-                    spec_raw = await spec_el.inner_text() if spec_el else ""
+                    spec_text = await spec_el.inner_text() if spec_el else ""
                     
-                    if not raw_url: continue
-
-                    # Lempar ke Pipeline agar mesin Scrapy tidak terbeban pengolahan string
+                    # Lempar data mentah ke Pipeline untuk diparsing angkanya (LT, LB, dll)
                     yield {
+                        "id": prop_id,
                         "judul": title.strip(),
-                        "url_asli": f"https://www.rumah123.com{raw_url}" if raw_url.startswith("/") else raw_url,
+                        "url_properti": url_prop,
                         "harga_raw": price_raw.strip(),
                         "lokasi": location.strip(),
-                        "spec_raw": spec_raw.strip()
+                        "spec_raw": spec_text.strip()
                     }
                 except Exception as e:
                     self.logger.error(f"Error parsing card: {e}")

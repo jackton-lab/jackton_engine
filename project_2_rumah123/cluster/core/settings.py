@@ -60,10 +60,10 @@ PLAYWRIGHT_CONTEXT_ARGS = {
 }
 
 # ==========================================
-# 5. DATA WAREHOUSING (SUPABASE)
+# 5. DATA WAREHOUSING (LOCAL ARCHIVE)
 # ==========================================
 ITEM_PIPELINES = {
-    'core.pipelines.SupabaseWarehousePipeline': 300,
+    'core.pipelines.JsonArchivePipeline': 300,
 }
 
 REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
