@@ -578,7 +578,7 @@
       // Mengambil dari tabel 'investments' sesuai sistem scraping
       const { data, error } = await supabaseClient
         .from('investments')
-        .select('url_asli, harga_total, klasifikasi, kota')
+        .select('url_asli, harga_total, klasifikasi, kota, lokasi')
         .order('created_at', { ascending: false })
         .limit(8);
         
@@ -631,10 +631,11 @@
         const margin = 1.15 + (Math.random() * 0.1); 
         const yieldT = '+' + ((margin - 1) * 100).toFixed(1) + '%';
         
-        // Gunakan 'kota' sebagai identitas lokasi
-        const location = (deal.kota || 'N/A').toUpperCase().substring(0, 8);
+        // Robust Location Extraction
+        const locationStr = (deal.kota || deal.lokasi || 'N/A').toUpperCase();
+        const locationShort = locationStr.split(',').pop().trim().substring(0, 8);
         
-        html += `<span class='bbg-cyan'>${('JKT0'+(i+1)).padEnd(10, ' ')}</span>${location.padEnd(10, ' ')}<span class='bbg-white'>${priceF.padEnd(8, ' ')}</span><span class='bbg-green'>${yieldT}</span>\n`;
+        html += `<span class='bbg-cyan'>${('JKT0'+(i+1)).padEnd(10, ' ')}</span>${locationShort.padEnd(10, ' ')}<span class='bbg-white'>${priceF.padEnd(8, ' ')}</span><span class='bbg-green'>${yieldT}</span>\n`;
       });
       dataBody.innerHTML = html;
     }

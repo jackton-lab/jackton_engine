@@ -98,9 +98,17 @@ async def analyze_batch_v62(batch, client):
 
 async def run_ai_analysis():
     load_dotenv()
-    input_path = Path('brankas_data/mentah/properti_mentah.json')
-    output_path = Path('brankas_data/bersih/properti_analisis.json')
-    if not input_path.exists(): return
+    script_dir = Path(__file__).resolve().parent
+    input_path = script_dir / 'brankas_data' / 'mentah' / 'properti_mentah.json'
+    output_path = script_dir / 'brankas_data' / 'bersih' / 'properti_analisis.json'
+    
+    if not input_path.exists():
+        print(f"[!] File input tidak ditemukan di: {input_path}")
+        return
+    
+    # Ensure output directory exists
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    
     with open(input_path, 'r') as f: raw_data = json.load(f)
 
     print(f"[*] NEURAL ENGINE V62: Memulai Audit Properti Nasional ({len(raw_data)} item)...")

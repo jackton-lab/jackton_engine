@@ -26,13 +26,19 @@ def upload_to_supabase():
 
     payloads = []
     for item in data:
+        # EKSTRAKSI KOTA: Mengambil bagian terakhir setelah koma (Contoh: "Galaxy, Bekasi" -> "Bekasi")
+        lokasi_full = item.get('lokasi', 'N/A')
+        parts = [p.strip() for p in lokasi_full.split(',')]
+        kota = parts[-1] if len(parts) > 1 else lokasi_full
+        
         # Sinkronisasi field dengan skema tabel 'investments'
         # Memastikan analisis_ai (string) masuk ke kolom 'summary'
         payloads.append({
             "id_properti": item.get('id'),
             "judul": item.get('judul', 'N/A')[:255],
             "url_asli": item.get('url_properti'),
-            "lokasi": item.get('lokasi', 'N/A')[:100],
+            "lokasi": lokasi_full[:100],
+            "kota": kota[:50], # Kolom baru untuk Frontend
             "harga_total": int(item.get('harga', 0)),
             "lt": int(item.get('lt', 0)),
             "lb": int(item.get('lb', 0)),

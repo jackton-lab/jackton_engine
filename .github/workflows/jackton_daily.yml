@@ -41,19 +41,22 @@ jobs:
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: |
-          # Gunakan skrip asli Bapak untuk audit AI mendalam
-          docker compose run --workdir /app/.. worker python3 project_2_rumah123/2_ai.py
+          # Install dependencies on host
+          pip install groq python-dotenv
           
-          # Ambil hasil bersih dari kontainer
-          CONTAINER_ID=$(docker ps -a --filter "label=com.docker.compose.service=worker" --format "{{.ID}}" | head -n 1)
-          docker cp $CONTAINER_ID:/app/project_2_rumah123/brankas_data/bersih/properti_analisis.json project_2_rumah123/brankas_data/bersih/
+          # Jalankan audit AI di host menggunakan data yang sudah ditarik
+          python3 project_2_rumah123/2_ai.py
 
       - name: 4. Run Supabase Upload (Sinkronisasi V60)
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
         run: |
-          docker compose run --workdir /app/.. worker python3 project_2_rumah123/4_upload.py
+          # Install dependencies on host
+          pip install supabase
+          
+          # Jalankan sinkronisasi di host
+          python3 project_2_rumah123/4_upload.py
 
       - name: 5. Archive Data to GitHub
         run: |
