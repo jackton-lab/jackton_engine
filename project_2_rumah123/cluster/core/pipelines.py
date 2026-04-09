@@ -45,6 +45,11 @@ class RedisResultsPipeline:
         price_val = self.parse_price(item.get("harga_raw", ""))
         lt, lb = self.parse_area(item.get("spec_text", ""))
         
+        # LOGIKA ANTI-SAMPAH: Jika harga 0 atau LT 0, jangan masukkan ke database
+        if price_val == 0 or lt == 0:
+            spider.logger.warning(f"Skipping item {item['id']} due to missing price or area.")
+            return item
+
         # Ekstraksi KT/KM (Kamar Tidur / Kamar Mandi)
         try:
             kt = int(re.search(r"(\d+)", item.get("kt_raw", "0")).group(1))

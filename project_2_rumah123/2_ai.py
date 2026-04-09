@@ -66,7 +66,11 @@ async def analyze_batch_v62(batch, client):
 
     TUGAS:
     1. Cocokkan lokasi properti dengan Database Benchmark.
-    2. Bandingkan 'harga_m2' (dari data) dengan range benchmark wilayah tersebut.
+    2. JIKA LOKASI TIDAK ADA DI BENCHMARK: 
+       - Lakukan 'General Estimation' berdasarkan konteks provinsi atau kota terdekat.
+       - Tetap berikan skor (Skor 70-75 jika harga masuk akal untuk wilayah tersebut).
+       - Sebutkan dalam analisis audit: "Audit berdasarkan Estimasi Regional".
+    3. Bandingkan 'harga_m2' (dari data) dengan range benchmark wilayah tersebut.
     3. Beri Skor (0-100):
        - 90+ (SUPER HOT): Harga/m2 minimal 20% DI BAWAH batas bawah benchmark wilayah tersebut.
        - 80-89 (HOT DEAL): Harga/m2 di batas bawah atau sedikit di bawah.
