@@ -14,7 +14,7 @@ def queue_massive_urls():
     
     script_dir = Path(__file__).resolve().parent
     # Di Docker, config.json ada di /app/config.json
-    config_path = script_dir.parent.parent / 'config.json'
+    config_path = script_dir.parent / 'config.json'
     
     if not config_path.exists():
         print(f"[!] ERROR: config.json tidak ditemukan di {config_path}")
