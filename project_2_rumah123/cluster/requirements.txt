@@ -2,6 +2,7 @@ scrapy
 scrapy-redis
 scrapy-playwright
 playwright
+redis
 seleniumbase
 beautifulsoup4==4.12.2
 google-generativeai

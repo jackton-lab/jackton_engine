@@ -13,6 +13,7 @@ def queue_massive_urls():
     load_dotenv()
     
     script_dir = Path(__file__).resolve().parent
+    # Di Docker, config.json ada di /app/config.json
     config_path = script_dir.parent.parent / 'config.json'
     
     if not config_path.exists():
