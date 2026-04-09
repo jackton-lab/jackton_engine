@@ -29,27 +29,36 @@ class Rumah123ClusterSpider(RedisSpider):
             )
 
     async def parse(self, response):
-        page: Page = response.meta["playwright_page"]
-        
-        # Penjaring Rakus (Greedy Collector)
-        cards = await page.query_selector_all("div[class*='card'], div[class*='listing'], article")
-        
-        for card in cards:
-            title_el = await card.query_selector("h2, h3")
-            title = await title_el.inner_text() if title_el else ""
+        page: Page = response.meta.get("playwright_page")
+        if not page:
+            return
+
+        try:
+            # Penjaring Rakus (Greedy Collector)
+            # Mencari elemen kartu properti yang umum di Rumah123
+            cards = await page.query_selector_all(".ui-organism-intersection-observer-wrapper, .ui-molecule-property-card")
             
-            price_el = await card.query_selector("*:has-text('Rp')")
-            price_raw = await price_el.inner_text() if price_el else ""
-            
-            link_el = await card.query_selector("a[href]")
-            raw_url = await link_el.get_attribute("href") if link_el else ""
-            
-            # Lempar ke Pipeline agar mesin Scrapy tidak terbeban pengolahan string
-            yield {
-                "judul": title.strip(),
-                "url_asli": f"https://www.rumah123.com{raw_url}" if raw_url.startswith("/") else raw_url,
-                "harga_raw": price_raw.strip(),
-                "spesifikasi_raw": await card.inner_text()
-            }
-            
-        await page.close()
+            for card in cards:
+                try:
+                    title_el = await card.query_selector("h2, .ui-molecule-property-card__title")
+                    title = await title_el.inner_text() if title_el else "No Title"
+                    
+                    price_el = await card.query_selector(".ui-molecule-property-card__price, *:has-text('Rp')")
+                    price_raw = await price_el.inner_text() if price_el else ""
+                    
+                    link_el = await card.query_selector("a")
+                    raw_url = await link_el.get_attribute("href") if link_el else ""
+                    
+                    if not raw_url: continue
+
+                    # Lempar ke Pipeline agar mesin Scrapy tidak terbeban pengolahan string
+                    yield {
+                        "judul": title.strip(),
+                        "url_asli": f"https://www.rumah123.com{raw_url}" if raw_url.startswith("/") else raw_url,
+                        "harga_raw": price_raw.strip()
+                    }
+                except Exception as e:
+                    self.logger.error(f"Error parsing card: {e}")
+                    continue
+        finally:
+            await page.close()

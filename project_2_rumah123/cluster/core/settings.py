@@ -20,18 +20,14 @@ CLOSESPIDER_TIMEOUT = 3600 # Maksimal 1 jam per sesi agar tidak over-run
 # 2. BEHAVIORAL SIMULATION (STEALTH)
 # ==========================================
 # Mesin akan beradaptasi secara dinamis dengan kecepatan server.
-# Jika server berat, mesin melambat seperti manusia membaca. Jika cepat, ngebut.
-AUTOTHROTTLE_ENABLED = True
-AUTOTHROTTLE_START_DELAY = 3.0
-AUTOTHROTTLE_MAX_DELAY = 10.0
-AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0 # 1 Request/detik/IP
+AUTOTHROTTLE_ENABLED = False 
+DOWNLOAD_DELAY = 1.0
 RANDOMIZE_DOWNLOAD_DELAY = True
 
 # Custom User-Agents Manager & Politeness
 DOWNLOADER_MIDDLEWARES = {
     'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
     'scrapy_user_agents.middlewares.RandomUserAgentMiddleware': 400,
-    # Inject Smart Proxy Middleware Here for IP Rotation
 }
 
 # ==========================================
@@ -56,6 +52,11 @@ PLAYWRIGHT_LAUNCH_OPTIONS = {
         "--disable-blink-features=AutomationControlled",
         "--no-sandbox"
     ]
+}
+
+PLAYWRIGHT_CONTEXT_ARGS = {
+    "viewport": {"width": 1280, "height": 720},
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
 }
 
 # ==========================================
