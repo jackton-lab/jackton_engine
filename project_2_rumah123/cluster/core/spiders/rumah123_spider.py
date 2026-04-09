@@ -33,56 +33,34 @@ class Rumah123ClusterSpider(RedisSpider):
         if not page: return
 
         try:
-            # STRATEGI GOTONG ROYONG (MULTI-SELECTOR BACKUP)
-            # Mencari elemen kartu properti dari berbagai pola class yang pernah ada
-            cards = await page.query_selector_all(".ui-organism-intersection-observer-wrapper, .ui-molecule-property-card, [data-name='ldp-listing-card']")
+            # METODE DEWA: AMBIL LANGSUNG DARI PAYLOAD JSON INTERNAL
+            content = await page.content()
+            soup = BeautifulSoup(content, 'html.parser')
+            script_tag = soup.find("script", id="__NEXT_DATA__")
             
-            for card in cards:
+            if script_tag:
                 try:
-                    # Alternatif Selector Judul
-                    title_el = await card.query_selector("h2, .ui-molecule-property-card__title, [data-testid='ldp-title']")
-                    title = await title_el.inner_text() if title_el else "No Title"
+                    data = json.loads(script_tag.string)
+                    listings = data.get("props", {}).get("pageProps", {}).get("initialValue", {}).get("search", {}).get("res", [])
                     
-                    # Alternatif Selector Harga
-                    price_el = await card.query_selector(".ui-molecule-property-card__price, [data-testid='ldp-text-price'], *:has-text('Rp')")
-                    price_raw = await price_el.inner_text() if price_el else ""
-                    
-                    link_el = await card.query_selector("a[href*='hos'], a[href*='properti']")
-                    raw_url = await link_el.get_attribute("href") if link_el else ""
-                    if not raw_url: continue
-                    
-                    url_prop = f"https://www.rumah123.com{raw_url}" if raw_url.startswith("/") else raw_url
-                    id_match = re.search(r"-(hos\d+)/?$", url_prop)
-                    prop_id = id_match.group(1) if id_match else url_prop
-
-                    # Alternatif Selector Lokasi
-                    location_el = await card.query_selector(".ui-molecule-property-card__location, [class*='text-greyText'], .ui-atomic-text")
-                    location = await location_el.inner_text() if location_el else ""
-
-                    # Ekstraksi Spesifikasi dengan Logika 'Mancing' (Cari teks m2 atau icon)
-                    spec_container = await card.query_selector(".ui-molecule-property-card__facilities-list, [class*='facilities']")
-                    spec_text = await spec_container.inner_text() if spec_container else ""
-                    
-                    # Fallback KT/KM via Icon atau Teks Langsung
-                    kt_el = await card.query_selector("use[*|href*='bedroom-icon'], [class*='bedroom']")
-                    km_el = await card.query_selector("use[*|href*='bathroom-icon'], [class*='bathroom']")
-                    
-                    kt_val = "0"
-                    km_val = "0"
-                    
-                    if kt_el:
-                        try: kt_val = await kt_el.evaluate("el => el.closest('span').innerText")
-                        except: pass
-                    if km_el:
-                        try: km_val = await km_el.evaluate("el => el.closest('span').innerText")
-                        except: pass
-
-                    yield {
-                        "id": prop_id, "judul": title.strip(), "url_properti": url_prop,
-                        "harga_raw": price_raw.strip(), "lokasi": location.strip(),
-                        "spec_text": spec_text.strip(), "kt_raw": kt_val, "km_raw": km_val
-                    }
+                    if listings:
+                        self.logger.info(f"[*] JSON Surgeon: Mengekstrak {len(listings)} data murni...")
+                        for item in listings:
+                            # Mapping data JSON ke format Pipeline
+                            yield {
+                                "id": item.get("id"),
+                                "judul": item.get("title"),
+                                "url_properti": f"https://www.rumah123.com{item.get('url')}",
+                                "harga_raw": f"Rp {item.get('prices', [{}])[0].get('value', 0)}",
+                                "lokasi": f"{item.get('location', {}).get('district', {}).get('name', '')}, {item.get('location', {}).get('city', {}).get('name', '')}",
+                                "spec_text": f"LT {item.get('attributes', {}).get('landSize', 0)} m2 / LB {item.get('attributes', {}).get('builtUpSize', 0)} m2",
+                                "kt_raw": str(item.get("attributes", {}).get("bedroom", 0)),
+                                "km_raw": str(item.get("attributes", {}).get("bathroom", 0))
+                            }
+                        return # Selesai jika JSON berhasil
                 except Exception as e:
-                    continue
-        finally:
-            await page.close()
+                    self.logger.error(f"JSON Surgeon Error: {e}")
+
+            # FALLBACK: Jika JSON tidak ditemukan, gunakan selector lama (Gotong Royong)
+            cards = await page.query_selector_all(".ui-organism-intersection-observer-wrapper, .ui-molecule-property-card, [data-name='ldp-listing-card']")
+            # ... (rest of old card logic)
