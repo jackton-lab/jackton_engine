@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://jackton.xyz/sitemap.xml
+Sitemap: https://lolos.online/sitemap.xml
