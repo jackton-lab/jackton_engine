@@ -14,7 +14,7 @@
     const loader = document.getElementById('intro-loader');
     const ctaCards = document.querySelectorAll('.cta-card');
     
-    // Hide loader and play entry animations after 4000ms (4 seconds)
+    // Hide loader and play entry animations after 2500ms
     setTimeout(function () {
       if (loader) {
         loader.classList.add('fade-out');
@@ -23,7 +23,7 @@
         });
       }
       document.body.classList.add('loaded');
-    }, 4000);
+    }, 2500);
 
     /* Staggered card entry animation fallback */
     const animatedEls = document.querySelectorAll('.animate-fade-up');
@@ -108,6 +108,33 @@
           card.style.transform = '';
           card.style.transformOrigin = '';
         });
+      });
+    }
+
+    /* ── YOUTUBE LITE FACADE ─── */
+    var ytFacade = document.getElementById('yt-facade');
+    if (ytFacade) {
+      function loadYouTube() {
+        var iframe = document.createElement('iframe');
+        iframe.src = 'https://www.youtube.com/embed/uC-W9Gh2E0Y?autoplay=1';
+        iframe.title = 'Jackton Real Estate - Video Pengenalan';
+        iframe.frameBorder = '0';
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+        iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+        iframe.allowFullscreen = true;
+        iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none;display:block;';
+        ytFacade.textContent = '';
+        ytFacade.appendChild(iframe);
+        ytFacade.removeAttribute('role');
+        ytFacade.removeAttribute('tabindex');
+        ytFacade.removeAttribute('aria-label');
+      }
+      ytFacade.addEventListener('click', loadYouTube);
+      ytFacade.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          loadYouTube();
+        }
       });
     }
 
