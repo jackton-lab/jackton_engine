@@ -46,6 +46,7 @@ a { color: inherit; text-decoration: none; }
   flex-direction: column;
   overflow-x: hidden;
   width: 100%;
+  position: relative;
 }
 
 .container {
