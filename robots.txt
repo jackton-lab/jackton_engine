@@ -1,7 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /assets/
-Allow: /assets/ogimage.png
-Allow: /assets/favicon.png
 
 Sitemap: https://jackton.xyz/sitemap.xml

@@ -1,0 +1,28 @@
+# Jackton Real Estate
+
+> Jackton Real Estate adalah ekosistem jaringan properti eksklusif Indonesia yang menghubungkan investor, pembeli, developer, dan agen properti profesional di seluruh Indonesia.
+
+## Tentang Jackton
+
+Jackton Real Estate membangun ekosistem properti berbasis jaringan (network-first). Kami percaya bahwa jaringan yang berkualitas membuka peluang yang lebih besar di dunia properti Indonesia.
+
+## Layanan
+
+- [Pembeli & Investor](https://jackton.xyz/) - Platform pencarian properti eksklusif dengan tiga tier: Gratis, Standar, dan Investor
+- [Developer, Agen & Pelaku Industri](https://community.jackton.xyz/) - Komunitas eksklusif pelaku industri properti Indonesia
+
+## Kontak
+
+- WhatsApp: +62 857-2514-3083
+- Website: https://jackton.xyz/
+
+## Struktur Situs
+
+- `/` - Hub utama (jackton.xyz) — pilih peran Anda sebagai Pembeli/Investor atau Pelaku Industri
+- `community.jackton.xyz` - Platform komunitas untuk developer, agen, dan pelaku industri properti
+
+## Filosofi
+
+"As long as you're going to be thinking anyway, think big. Real estate is at the core of almost every business, and it certainly is at the core of most people's wealth." — Donald J. Trump
+
+Jackton dibangun atas filosofi ini: jaringan kelas atas menghasilkan peluang kelas atas.
