@@ -14,7 +14,7 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  overscroll-behavior: none;
+  overflow-x: hidden;
 }
 
 body {
@@ -23,7 +23,7 @@ body {
   color: var(--color-ink);
   min-height: 100vh;
   position: relative;
-  overscroll-behavior: none;
+  overflow-x: hidden;
 }
 
 /* Full body texture pattern */
