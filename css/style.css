@@ -59,7 +59,6 @@ a { color: inherit; text-decoration: none; }
 /* ── HEADER ───────────────────────────────────────────────── */
 .site-header {
   padding-block: var(--space-6);
-  overflow-x: clip;
 }
 
 .header-inner {
@@ -71,9 +70,10 @@ a { color: inherit; text-decoration: none; }
 .brand-logo {
   display: block;
   width: 328px;
+  max-width: 100%;
   height: 140px;
   position: relative;
-  overflow: visible;
+  overflow: hidden;
   cursor: pointer;
   user-select: none;
 }
@@ -162,7 +162,6 @@ a { color: inherit; text-decoration: none; }
 /* ── HERO — TAGLINE + VIDEO EMBED ─────────────────────────── */
 .hero-section {
   padding-block: var(--space-12) var(--space-10);
-  overflow-x: clip;
 }
 
 .hero-section .container {
@@ -200,6 +199,7 @@ a { color: inherit; text-decoration: none; }
   border-radius: 24px;
   margin-inline: auto;
   margin-bottom: var(--space-20); /* Generous space to the next section */
+  overflow: hidden;
 }
 
 /* Ambient glow gradient behind video container */
